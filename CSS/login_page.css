@@ -1,0 +1,51 @@
+#company_name {
+    text-align: center;
+    font-size: 30px;
+    padding: 20px;
+    height: 80px;
+}
+
+#body {
+    display: flex;
+    width: 100%;
+    height: 700px;
+}
+
+#leftside_box {
+    float: left;
+    width: 35%;
+}
+
+#login_box {
+    float: left;
+    text-align: center;
+    border: solid black 1px;
+    width: 30%;
+    height: 300px;
+    background-color: darkgray;
+}
+
+#rightside_box {
+    float: left;
+    width: 35%;
+}
+
+#login_text {
+    float: left;
+    width: 100%;
+    font-size: 30px;
+    margin-top: 30px;
+}
+
+#login_input {
+    width: 80%;
+    margin-top: 20px;
+    height: 17px;
+
+}
+
+#login_button {
+    margin-top: 30px;
+    width: 75px;
+    height: 25px;
+}
