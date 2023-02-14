@@ -8,11 +8,11 @@ if ($_SESSION['login_status'] === '') {
     $log = 'login.php';
     $username = "Login";
     $home = 'home.php';
-    $service = 'login.php';
+    $usertype = 'login.php';
 } else {
     $log = 'logout.php';
     $username = $_SESSION['username'];
-    $service = $_SESSION['service'];
+    $usertype = $_SESSION['usertype'];
     $home = 'home.php';
 }
 ?>
@@ -31,24 +31,26 @@ if ($_SESSION['login_status'] === '') {
     <header id="company_name">
         ABC Company
     </header>
-    <div id="body">
-        <div id="leftside_box"></div>
-        <div id="login_box">
-            <p id="login_text">Login</p>
-            <div style="float: left; width: 28%; height: 75px; text-align: right;">
-                <h3>User name:</h3>
-                <h3>Password:</h3>
-            </div>
-            <div style="float: right; width: 70%; height: 75px; text-align: left;">
-                <input id="login_input" type="text">
-                <input id="login_input" type="text">
-            </div>
-            <div style="float: left; width: 100%;">
-                <button id="login_button">Submit</button>
-            </div>
+    <section id="section1">
+        <div id="left_box"></div>
+        <div id="center_box">
+            <form action="login_check.php" id="login_form" method="POST">
+                <p id="login_text">Login</p>
+                <div style="text-align: right; margin-right: 70px ;">
+                    <label for="username" style="margin-right: 10px;"><b>User name</b></label><input id="login_input"
+                        type="text" placeholder="User Name" name="username" maxlength="50" require>
+                    <br>
+                    <label for="password" style="margin-right: 10px;"><b>Password</b></label><input id="login_input"
+                        type="password" placeholder="Password" name="password" maxlength="50" required>
+                </div>
+
+                <div id="login_button"><button type="submit" name=" login_button">Submit</button></div>
+                <p>Forget Password?</p>
+            </form>
         </div>
-        <div id="rightside_box"></div>
-    </div>
+        <div id="right_box"></div>
+    </section>
+
 </body>
 <footer>
 </footer>
