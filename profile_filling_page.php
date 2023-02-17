@@ -1,20 +1,8 @@
 <?php
 session_start();
-$_SESSION['login_status'] = '';
+$_SESSION['login_status'] = '0';
 $_SESSION['username'] = '';
 $_SESSION['user_id'] = '';
-$_SESSION['usertype'] = '';
-if ($_SESSION['login_status'] === '') {
-    $log = 'login.php';
-    $username = "Login";
-    $home = 'home.php';
-    $service = 'login.php';
-} else {
-    $log = 'logout.php';
-    $username = $_SESSION['username'];
-    $service = $_SESSION['service'];
-    $home = 'home.php';
-}
 ?>
 <!DOCTYPE html>
 <html>
@@ -36,26 +24,19 @@ if ($_SESSION['login_status'] === '') {
         <div id="center_box">
             <h2>Welcome to ABC Company</h2>
             <h4>Please complete your profile!</h4>
-            <div id="input_box">
-                <input id="input_field" name=" fname" type="text" style="width: 150px;"> Last Name: <input
-                    id=" input_field" name="lname" type="text" style="width: 150px;"><br><br>
-                <input id="input_field" name="DOB" type="date" style="width: 100px;"><br><br>
-                <input id="input_field" name="address" type="text"><br><br>
-                <input id="input_field" name="city" type="text" style="width: 100px;"> Zipcode: <input id="input_field"
-                    name="zipcode" style="width: 80px;" maxlength="5" type="number">
-            </div>
-            <div id="label_box">
-                <p>First Name:</p><br>
-                <p>Date of Birth:</p><br>
-                <p>Address:</p><br>
-                <p>City:</p><br>
-
-            </div>
-
-            <div id="submit_button">
-                <button>Submit</button>
-            </div>
-
+            <form id="form_box" action="profile_filling_action.php" method="POST">
+                <label for="name">Full Name:</label><input id="input_field" name="name" type="text" required><br>
+                <label for="address1">Address #1</label><input id="input_field" name="address1" type="text"
+                    required><br>
+                <label for="address2">Address #2</label><input id="input_field" name="address2" type="text"><br>
+                <label for="city">City</label><input id="input_field" name="city" type="text" style="width: 120px;"
+                    required>
+                <label for="state">State</label><input id="input_field" name="state" style="width: 80px;" type="text"
+                    required>
+                <label for="zipcode">Zipcode</label><input id="input_field" name="zipcode" style="width: 80px;"
+                    maxlength="5" type="number" required>
+                <div><button type="submit" name="pf_submit_button">Submit</button></div>
+            </form>
         </div>
         <div id="rightside_box"></div>
     </div>

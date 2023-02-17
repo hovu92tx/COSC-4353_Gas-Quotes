@@ -1,5 +1,4 @@
 #company_name {
-    float: left;
     text-align: center;
     font-size: 30px;
     padding: 20px;
@@ -9,36 +8,20 @@
 
 #section1 {
     display: flex;
-    width: 100%;
 }
 
 #left_box {
     float: left;
-    width: 35%;
-}
-
-#center_box {
-    float: left;
-    width: 30%;
-}
-
-#right_box {
-    float: left;
-    width: 35%;
+    text-align: center;
+    width: 25%;
+    height: 350px;
+    border: solid black 1px;
+    background-color: lightgray;
 }
 
 #login_text {
-    width: 100%;
     font-size: 30px;
     margin-top: 30px;
-}
-
-#login_form {
-    display: flex;
-    text-align: center;
-    border: solid black 1px;
-    background-color: darkgray;
-    width: 100%;
 }
 
 #login_input {
@@ -52,4 +35,21 @@
     margin-top: 30px;
     width: 100%px;
     height: 25px;
+}
+
+#right_box {
+    float: left;
+    width: 75%;
+    border: solid black 1px;
+    background-color: lightgray;
+}
+
+#quote_form {
+    float: left;
+    text-align: center;
+    width: 48%;
+    border: solid black 1px;
+    background-color: white;
+    margin: 5px;
+    padding: 5px;
 }
