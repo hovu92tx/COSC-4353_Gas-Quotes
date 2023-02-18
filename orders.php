@@ -27,7 +27,9 @@ try {
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="CSS/dashboard.css">
     <link rel="stylesheet" href="CSS/orders.css">
+    <script src="clock.js"></script>
 </head>
 
 <body>
@@ -56,7 +58,7 @@ try {
             <h2 style="text-align: center;">Order History</h2>
             <?php
             try {
-                $sql2 = "SELECT * FROM products";
+                $sql2 = "SELECT * FROM orders WHERE user_id LIKE $userid";
                 $statement2 = $conn->query($sql2);
                 $results2 = $statement2->fetchAll(PDO::FETCH_ASSOC);
                 if ($results2) {
@@ -68,6 +70,8 @@ try {
                                 <p>Price: ' . $product_price . '/Galon</p><button>Add to Cart</button></div>';
                         echo $html;
                     }
+                } else {
+                    echo '<div style= "text-align: center;" ><p>There was no order!</p></div>';
                 }
             } catch (PDOException $error) {
                 echo $error;

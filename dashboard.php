@@ -4,6 +4,7 @@ require 'connect.php';
 date_default_timezone_set('America/Chicago');
 $date = date('m-d-y h:i:s');
 $_SESSION['date'] = $date;
+
 try {
     $userid = $_SESSION['userid'];
     $sql = "SELECT * FROM user_profiles WHERE userid LIKE '$userid'";
@@ -32,6 +33,7 @@ try {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="CSS/dashboard.css">
+    <script src="clock.js"></script>
 </head>
 
 <body>
@@ -56,6 +58,9 @@ try {
         </div>
         <div id="right_box">
             <h2 style="text-align: center;">Prices of gas in <?php echo $_SESSION['location'] ?></h2>
+            <div style=" text-align: center; margin: 10px;">
+                <span id='ct7'></span>
+            </div>
             <?php
             try {
                 $sql2 = "SELECT * FROM products";
@@ -72,7 +77,7 @@ try {
                     }
                 }
             } catch (PDOException $error) {
-                echo $error;
+                echo 'Connection fail!';
             }
             ?>
         </div>
