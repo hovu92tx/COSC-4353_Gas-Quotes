@@ -25,7 +25,7 @@ $_SESSION['date'] = '';
     <section id="section1">
         <div id="left_box">
             <form action="login_check.php" method="POST">
-                <p id="login_text">Login</p>
+                <h2>Login</h2>
                 <div style="text-align: right; margin-right: 70px ;">
                     <label for="username" style="margin-right: 10px;"><b>User name</b></label><input id="login_input" type="text" placeholder="User Name" name="username" maxlength="50" require>
                     <br>
@@ -33,7 +33,7 @@ $_SESSION['date'] = '';
                 </div>
 
                 <div id="login_button"><button type="submit" name=" login_button">Submit</button></div>
-                <a href="forgetpassword.php">For get password?</a>
+                <div id="forget_pass_link"><a href="forgetpassword.php">Forget password?</a></div>
             </form>
 
         </div>
