@@ -2,7 +2,6 @@
 session_start();
 require('connect.php');
 $_SESSION['login_status'] = '';
-$_SESSION['location'] = '';
 $_SESSION['username'] = '';
 $_SESSION['userid'] = '';
 $_SESSION['date'] = '';

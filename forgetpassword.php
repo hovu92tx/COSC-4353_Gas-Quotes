@@ -2,7 +2,6 @@
 session_start();
 require('connect.php');
 $_SESSION['login_status'] = '';
-$_SESSION['location'] = '';
 $_SESSION['username'] = '';
 $_SESSION['userid'] = '';
 ?>
@@ -26,11 +25,9 @@ $_SESSION['userid'] = '';
             <form action="login_check.php" method="POST">
                 <p id="login_text">Login</p>
                 <div style="text-align: right; margin-right: 70px ;">
-                    <label for="username" style="margin-right: 10px;"><b>User name</b></label><input id="login_input"
-                        type="text" placeholder="User Name" name="username" maxlength="50" require>
+                    <label for="username" style="margin-right: 10px;"><b>User name</b></label><input id="login_input" type="text" placeholder="User Name" name="username" maxlength="50" require>
                     <br>
-                    <label for="password" style="margin-right: 10px;"><b>Password</b></label><input id="login_input"
-                        type="password" placeholder="Password" name="password" maxlength="50" required>
+                    <label for="password" style="margin-right: 10px;"><b>Password</b></label><input id="login_input" type="password" placeholder="Password" name="password" maxlength="50" required>
                 </div>
 
                 <div id="login_button"><button type="submit" name=" login_button">Submit</button></div>
