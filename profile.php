@@ -46,9 +46,7 @@ try {
                     <h3><b>Welcome:</b>
                 </label><?php echo $name ?></h3>
             </div>
-            <div style=" text-align: center; margin: 10px;">
-                <?php echo $_SESSION['date']; ?>
-            </div>
+
             <div class="vertical-menu">
                 <a href="dashboard.php">Home</a>
                 <a href="Cart.php">Cart</a>

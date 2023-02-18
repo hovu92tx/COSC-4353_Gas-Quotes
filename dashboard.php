@@ -45,18 +45,12 @@ try {
                         <h3><b>Welcome:</b>
                     </label><?php echo $name ?></h3>
                 </div>
-                <div style=" text-align: center; margin: 10px;">
-                    <?php echo $_SESSION['date']; ?>
-                </div>
-                <div>
-                    <div class="vertical-menu">
-                        <a href="dashboard.php" class="active">Home</a>
-
-                        <a href="cart.php">Cart</a>
-                        <a href="orders.php">Orders</a>
-                        <a href="profile.php">Profile</a>
-                        <a href="logout_action.php">Log Out</a>
-                    </div>
+                <div class=" vertical-menu">
+                    <a href="dashboard.php" class="active">Home</a>
+                    <a href="cart.php">Cart</a>
+                    <a href="orders.php">Orders</a>
+                    <a href="profile.php">Profile</a>
+                    <a href="logout_action.php">Log Out</a>
                 </div>
             </form>
         </div>

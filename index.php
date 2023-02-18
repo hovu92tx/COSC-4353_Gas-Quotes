@@ -41,21 +41,21 @@ $_SESSION['date'] = '';
             <h2 style="text-align: center;">Quotes</h2>
             <?php
             try {
-                $sql2 = "SELECT * FROM products";
-                $statement = $conn->query($sql2);
-                $results2 = $statement->fetchAll(PDO::FETCH_ASSOC);
-                if ($results2) {
-                    foreach ($results2 as $result2) {
-                        $product_name = $result2['product_name'];
-                        $product_price = $result2['product_price'];
-                        $product_id = $result2['product_id'];
+                $sql = "SELECT * FROM products";
+                $statement = $conn->query($sql);
+                $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+                if ($results) {
+                    foreach ($results as $result) {
+                        $product_name = $result['product_name'];
+                        $product_price = $result['product_price'];
+                        $product_id = $result['product_id'];
                         $html = '<div id="quote_form"><h4>' . $product_name . '</h4>
                                 <p>Price: ' . $product_price . '/Galon</p></div>';
                         echo $html;
                     }
                 }
             } catch (PDOException $error) {
-                echo $error;
+                echo 'Server error';
             }
             ?>
         </div>

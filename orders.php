@@ -16,7 +16,6 @@ try {
         }
     }
 } catch (PDOException $error) {
-    echo $error;
 }
 
 ?>
@@ -42,9 +41,7 @@ try {
                         <h3><b>Welcome:</b>
                     </label><?php echo $name ?></h3>
                 </div>
-                <div style=" text-align: center; margin: 10px;">
-                    <?php echo $_SESSION['date']; ?>
-                </div>
+
                 <div class="vertical-menu">
                     <a href="dashboard.php">Home</a>
                     <a href="cart.php">Cart</a>
@@ -64,9 +61,9 @@ try {
                 $results2 = $statement2->fetchAll(PDO::FETCH_ASSOC);
                 if ($results2) {
                     foreach ($results2 as $result2) {
-                        $product_name = $result2['product_name'];
-                        $product_price = $result2['product_price'];
-                        $product_id = $result2['product_id'];
+                        $product_name = $result2['order_product_name'];
+                        $product_price = $result2['order_unit_price'];
+                        $product_id = $result2['order_product_id'];
                         $html = '<div id="quote_form"><h4>' . $product_name . '</h4>
                                 <p>Price: ' . $product_price . '/Galon</p><button>Add to Cart</button></div>';
                         echo $html;
