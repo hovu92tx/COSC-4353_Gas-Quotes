@@ -1,6 +1,8 @@
 <?php
 session_start();
 require 'connect.php';
+$name = "#";
+error_reporting(0);
 try {
     $userid = $_SESSION['userid'];
     $sql = "SELECT * FROM user_profiles WHERE userid LIKE '$userid'";
@@ -73,7 +75,7 @@ try {
                     echo '<div style= "text-align: center;" ><p>There was no order!</p></div>';
                 }
             } catch (PDOException $error) {
-                echo $error;
+                echo "Connection fail!";
             }
             ?>
         </div>

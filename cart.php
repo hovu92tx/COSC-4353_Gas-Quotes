@@ -1,6 +1,7 @@
 <?php
 session_start();
 require 'connect.php';
+$name = "#";
 try {
     $userid = $_SESSION['userid'];
     $sql = "SELECT * FROM user_profiles WHERE userid LIKE '$userid'";
@@ -45,7 +46,6 @@ try {
                 </div>
                 <div class="vertical-menu">
                     <a href="dashboard.php">Home</a>
-
                     <a href="cart.php" class="active">Cart</a>
                     <a href="orders.php">Orders</a>
                     <a href="profile.php">Profile</a>
@@ -56,12 +56,68 @@ try {
         </div>
         <div id="right_box">
             <h2 style="text-align: center;">Cart</h2>
-            <?php
-            echo '<div style= "text-align: center;" ><p>Cart is empty!</p></div>';
-            ?>
+            <div>
+                <table>
+                    <tr>
+                        <th id="item_id">Product ID</th>
+                        <th id="name">Product Name</th>
+                        <th id="price">Price/Gallon</th>
+                        <th id="quantity">Gallon</th>
+                        <th id="total">Total</th>
+                        <th>Actions</th>
+                    </tr>
+                </table>
+            </div>
+            <div id="list">
+                <?php
+                $_SESSION['order_total'] = 0;
+
+                if (empty($_SESSION['cart'])) {
+                    $html = '<div style="text-align: center"><p>Cart is empty</p></div><ul><li><a href="dashboard.php">Start Shopping</a></li></ul>';
+                    echo $html;
+                } else {
+
+                    foreach ($_SESSION['cart'] as $product_id => $quantity) {
+                        try {
+                            $sql2 = "SELECT * FROM products WHERE product_id LIKE $product_id";
+                            $statement2 = $conn->query($sql2);
+                            $results2 = $statement2->fetchAll(PDO::FETCH_ASSOC);
+                            if ($results2) {
+                                foreach ($results2 as $result2) {
+                                    $product_name = $result2['product_name'];
+                                    $product_price = $result2['product_price'];
+                                    $total = $quantity * $product_price;
+                                    $_SESSION['order_total'] += $total;
+                                    $order_total = $_SESSION['order_total'];
+                                    $html = '<form id="item" action="cart_function.php" method="POST">
+                                <table>
+                                    <tr>
+                                        <th id="item_id"><input id="infor" name="product_id" type="text" value="' . $product_id . '" readonly="readonly"></input></th>
+                                        <th id="name">' . $product_name . '</th>
+                                        <th id="price">$' . $product_price . '</th>
+                                        <th id="quantity"><input id="quantity_input" name="quantity" type="number" value="' . $quantity . '" ></input><button type="submit" name="update">Update</button></th>
+                                        <th id="total">$' . $total . '</th>
+                                        <th><button type="submit" name="remove">Remove</button></th>
+                                    </tr>
+                                </table>';
+                                    echo $html;
+                                }
+                            }
+                        } catch (PDOException $error) {
+                            echo 'Connection fail!';
+                        }
+                    }
+                    echo '<div id="order_total"><h2>Order Total: $' . $order_total . ' </h2></div><ul>
+                    <li><a href="shipping_infor.php">Place Order</a></li>
+                    <li><a href="dashboard.php">Continue Shopping</a></li>
+                    <li><a href="clear_cart.php">Clear Cart</a></li>
+                  </ul>';
+                }
+                ?>
+            </div>
+
         </div>
     </section>
-
 </body>
 <footer>
 </footer>

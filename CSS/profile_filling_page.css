@@ -17,6 +17,7 @@ section {
 
 #center_box {
     text-align: center;
+    margin: auto;
     width: 50%;
 }
 
@@ -26,5 +27,6 @@ form {
 }
 
 #input_field {
+    width: 600px;
     margin: 15px;
 }

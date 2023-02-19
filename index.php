@@ -5,6 +5,8 @@ $_SESSION['login_status'] = '';
 $_SESSION['username'] = '';
 $_SESSION['userid'] = '';
 $_SESSION['date'] = '';
+$_SESSION['cart'] = array();
+error_reporting(0);
 ?>
 <!DOCTYPE html>
 <html>
@@ -32,7 +34,7 @@ $_SESSION['date'] = '';
                     <label for="password" style="margin-right: 10px;"><b>Password</b></label><input id="login_input" type="password" placeholder="Password" name="password" maxlength="50" required>
                 </div>
 
-                <div id="login_button"><button type="submit" name=" login_button">Submit</button></div>
+                <div id="login_button"><button type="submit" name="login_button">Submit</button></div>
                 <div id="forget_pass_link"><a href="forgetpassword.php">Forget password?</a></div>
             </form>
 
@@ -50,12 +52,12 @@ $_SESSION['date'] = '';
                         $product_price = $result['product_price'];
                         $product_id = $result['product_id'];
                         $html = '<div id="quote_form"><h4>' . $product_name . '</h4>
-                                <p>Price: ' . $product_price . '/Galon</p></div>';
+                                <p>Price: ' . $product_price . '/Gallon</p></div>';
                         echo $html;
                     }
                 }
             } catch (PDOException $error) {
-                echo 'Server error';
+                echo "Server Error";
             }
             ?>
         </div>

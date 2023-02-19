@@ -1,6 +1,7 @@
 <?php
 session_start();
 require 'connect.php';
+error_reporting(0);
 
 try {
     if (isset($_POST["login_button"])) {

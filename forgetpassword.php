@@ -4,6 +4,7 @@ require('connect.php');
 $_SESSION['login_status'] = '';
 $_SESSION['username'] = '';
 $_SESSION['userid'] = '';
+error_reporting(0);
 ?>
 <!DOCTYPE html>
 <html>
