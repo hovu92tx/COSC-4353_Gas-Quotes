@@ -21,36 +21,30 @@ body {
 }
 
 .vertical-menu {
-    /* Set a width if you like */
     text-align: center;
 }
 
 .vertical-menu a {
-    /* Grey background color */
     color: black;
-    /* Black text color */
     display: block;
-    /* Make the links appear below each other */
     padding: 12px;
-    /* Add some padding */
     text-decoration: none;
-    /* Remove underline from links */
 }
 
 .vertical-menu a:hover {
     background-color: #ccc;
-    /* Dark grey background on mouse-over */
 }
 
 .vertical-menu a.active {
     background-color: #0505f5;
-    /* Add a green color to the "active/current" link */
     color: white;
 }
 
 #right_box {
     float: left;
     width: 75%;
+    border: solid black 1px;
+    min-height: 700px;
 }
 
 #quote_form {
@@ -70,4 +64,12 @@ body {
 #numberofgallon {
     width: 40px;
     margin: 5px;
+}
+
+#product_id {
+    float: left;
+    text-align: center;
+    width: 15px;
+    border: none;
+    background-color: rgb(97, 148, 243);
 }

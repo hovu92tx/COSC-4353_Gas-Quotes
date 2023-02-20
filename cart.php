@@ -2,6 +2,7 @@
 session_start();
 require 'connect.php';
 $name = "#";
+#error_reporting(0);
 try {
     $userid = $_SESSION['userid'];
     $sql = "SELECT * FROM user_profiles WHERE userid LIKE '$userid'";
@@ -17,6 +18,7 @@ try {
         }
     }
 } catch (PDOException $error) {
+    return $error;
 }
 
 ?>

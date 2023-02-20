@@ -64,31 +64,32 @@ try {
                 <a href="logout_action.php">Log Out</a>
             </div>
         </div>
-        </div>
         <div id="right_box">
             <h2 style="text-align: center;">Shipping Information</h2>
             <form action="place_order_review.php" method="POST">
-                <div><label for="name">Full Name:</label><input id="input_field" name="name" type="text"
-                        value="<?php echo $name ?>" required></div>
-                <div><label for="phone">Phone #:</label><input id="input_field" name="phone" type="text" required></div>
-                <div><label for="address1">Address:</label><input id="input_field" name="address1" type="text"
-                        value="<?php echo $address1 ?>" required></div>
-                <div><label for="city">City</label><input id="input_field" name="city" type="text" style="width: 120px;"
-                        value="<?php echo $city ?>" required>
-                    <label fo r="state">State</label><input id="input_field" name="state" style="width: 80px;"
-                        type="text" value="<?php echo $state ?>" required>
-                    <label for="zipcode">Zipcode</label><input id="input_field" name="zipcode" style="width: 80px;"
-                        maxlength="5" type="number" value="<?php echo $zipcode ?>" required>
-                </div>
-
-                <div style="width: 70%; margin: auto;">
+                <section><label id="label" for="name">Full Name</label>
+                    <input id="input" name="name" type="text" value="<?php echo $name ?>" readonly='readonly'>
+                </section>
+                <section><label id="label" for=" address1">Address</label>
+                    <input id="input" name="address1" type="text" value="<?php echo $address1 ?>" readonly='readonly'>
+                </section>
+                <section><label id="label" for="city">City</label>
+                    <input id="input" name="city" type="text" style="width: 120px;" value="<?php echo $city ?>" readonly='readonly'>
+                    <label id="label" for="state">State</label>
+                    <input id="input" name="state" style="width: 80px;" type="text" value="<?php echo $state ?>" readonly='readonly'>
+                    <label id="label" for="zipcode">Zipcode</label>
+                    <input id="input" name="zipcode" style="width: 80px;" maxlength="5" type="number" value="<?php echo $zipcode ?>" readonly='readonly'>
+                </section>
+                <section><label id="label" for=" date">Delivery Date </label>
+                    <input id="date" name="date" type="date" min="<?php echo date('Y-m-d'); ?>" required>
+                </section>
+                <section>
                     <a id="back_button" href="cart.php">Back</a>
                     <button type="submit" name="po_submit_button">Confirm</button>
-                </div>
+                </section>
             </form>
         </div>
     </section>
-
 </body>
 <footer>
 </footer>

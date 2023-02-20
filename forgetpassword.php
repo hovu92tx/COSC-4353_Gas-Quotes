@@ -27,20 +27,16 @@ error_reporting(0);
             <form action="login_check.php" method="POST">
                 <h2>Login</h2>
                 <div style="text-align: right; margin-right: 70px ;">
-                    <label for="username" style="margin-right: 10px;"><b>User name</b></label><input id="login_input"
-                        type="text" placeholder="User Name" name="username" maxlength="50" require>
+                    <label for="username" style="margin-right: 10px;"><b>User name</b></label><input id="login_input" type="text" placeholder="User Name" name="username" maxlength="50" require>
                     <br>
-                    <label for="password" style="margin-right: 10px;"><b>Password</b></label><input id="login_input"
-                        type="password" placeholder="Password" name="password" maxlength="50" required>
+                    <label for="password" style="margin-right: 10px;"><b>Password</b></label><input id="login_input" type="password" placeholder="Password" name="password" maxlength="50" required>
                 </div>
                 <div id="login_button"><button type="submit" name=" login_button">Submit</button></div>
                 <div id="forget_pass_link"><a href="forgetpassword.php">For get password?</a></div>
             </form>
-
         </div>
         <div id="right_box">
             <h2 style="text-align: center;">Recover Password!</h2>
-
         </div>
     </section>
 </body>

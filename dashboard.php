@@ -1,12 +1,11 @@
 <?php
 session_start();
 require 'connect.php';
+error_reporting(0);
 date_default_timezone_set('America/Chicago');
-$date = date('m-d-y h:i:s');
-$_SESSION['date'] = $date;
 $userid = $_SESSION['userid'];
 $name = "#";
-error_reporting(0);
+
 try {
 
     $sql = "SELECT * FROM user_profiles WHERE userid LIKE '$userid'";
@@ -66,8 +65,8 @@ try {
                         $product_name = $result2['product_name'];
                         $product_price = $result2['product_price'];
                         $product_id = $result2['product_id'];
-                        $html = '<form action="cart_function.php" id="quote_form" method="POST"><input name="product_id" type="text" value="' . $product_id . '" readonly="readonly"></input><h4>' . $product_name . '</h4>
-                                <p>Price: ' . $product_price . '/Gallon.' . $product_id . '</p><div id="buying"><a style="margin-right: 5px;">Number of Gallon  </a><input name="quantity" id="numberofgallon" type="number" value="1"></input><button name="add_to_cart">Add to Cart</button></div></form>';
+                        $html = '<form action="cart_function.php" id="quote_form" method="POST"><input id="product_id" name="product_id" type="text" value="' . $product_id . '" readonly="readonly"></input><h4>' . $product_name . '</h4>
+                                <p>Price: $' . $product_price . '/Gallon</p><div id="buying"><a style="margin-right: 5px;">Gallon  </a><input name="quantity" id="numberofgallon" type="number" value="1"></input><button name="add_to_cart">Add to Cart</button></div></form>';
                         echo $html;
                     }
                 }
@@ -75,7 +74,6 @@ try {
                 echo 'Connection fail!';
             }
             ?>
-        </div>
         </div>
     </section>
 

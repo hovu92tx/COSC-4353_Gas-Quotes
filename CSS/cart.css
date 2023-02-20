@@ -17,10 +17,13 @@
 #infor {
     width: 90%;
     text-align: center;
+    border: none;
+    background-color: #dddddd;
 }
 
 #item_id {
     width: 10%;
+
 }
 
 #name {

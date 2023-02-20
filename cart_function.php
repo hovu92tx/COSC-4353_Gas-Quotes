@@ -1,5 +1,6 @@
 <?php
 session_start();
+error_reporting(0);
 // Check if the "cart" array exists in the session
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = array();

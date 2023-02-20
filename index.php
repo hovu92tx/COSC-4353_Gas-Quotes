@@ -1,10 +1,8 @@
 <?php
 session_start();
 require('connect.php');
-$_SESSION['login_status'] = '';
 $_SESSION['username'] = '';
 $_SESSION['userid'] = '';
-$_SESSION['date'] = '';
 $_SESSION['cart'] = array();
 error_reporting(0);
 ?>
@@ -37,7 +35,6 @@ error_reporting(0);
                 <div id="login_button"><button type="submit" name="login_button">Submit</button></div>
                 <div id="forget_pass_link"><a href="forgetpassword.php">Forget password?</a></div>
             </form>
-
         </div>
         <div id="right_box">
             <h2 style="text-align: center;">Quotes</h2>
@@ -52,7 +49,7 @@ error_reporting(0);
                         $product_price = $result['product_price'];
                         $product_id = $result['product_id'];
                         $html = '<div id="quote_form"><h4>' . $product_name . '</h4>
-                                <p>Price: ' . $product_price . '/Gallon</p></div>';
+                                <p>Price: $' . $product_price . '/Gallon</p></div>';
                         echo $html;
                     }
                 }

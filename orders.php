@@ -80,7 +80,6 @@ try {
             ?>
         </div>
     </section>
-
 </body>
 <footer>
 </footer>
