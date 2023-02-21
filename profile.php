@@ -58,7 +58,7 @@ try {
 
             <div class="vertical-menu">
                 <a href="dashboard.php">Home</a>
-                <a href="Cart.php">Cart</a>
+                <a href="Cart.php">Cart (<?php echo $_SESSION['numberOfOrder'] ?>)</a>
                 <a href="orders.php">Orders</a>
                 <a href="profile.php" class="active">Profile</a>
                 <a href="logout_action.php">Log Out</a>
@@ -68,12 +68,18 @@ try {
         <div id="right_box">
             <h2 style="text-align: center;">Profile</h2>
             <form style="padding: 10px; text-align: center;" action="profile_filling_action.php" method="POST">
-                <label for="name">Full Name:</label><input id="input_field" name="name" type="text" value="<?php echo $name ?>" required><br>
-                <label for="address1">Address #1</label><input id="input_field" name="address1" type="text" value="<?php echo $address1 ?>" required><br>
-                <label for="address2">Address #2</label><input id="input_field" name="address2" type="text" value="<?php echo $address2 ?>"><br>
-                <label for="city">City</label><input id="input_field" name="city" type="text" style="width: 120px;" value="<?php echo $city ?>" required>
-                <label for="state">State</label><input id="input_field" name="state" style="width: 80px;" type="text" value="<?php echo $state ?>" required>
-                <label for="zipcode">Zipcode</label><input id="input_field" name="zipcode" style="width: 80px;" maxlength="5" type="number" value="<?php echo $zipcode ?>" required>
+                <label for="name">Full Name:</label><input id="input_field" name="name" type="text"
+                    value="<?php echo $name ?>" required><br>
+                <label for="address1">Address #1</label><input id="input_field" name="address1" type="text"
+                    value="<?php echo $address1 ?>" required><br>
+                <label for="address2">Address #2</label><input id="input_field" name="address2" type="text"
+                    value="<?php echo $address2 ?>"><br>
+                <label for="city">City</label><input id="input_field" name="city" type="text" style="width: 120px;"
+                    value="<?php echo $city ?>" required>
+                <label for="state">State</label><input id="input_field" name="state" style="width: 80px;" type="text"
+                    value="<?php echo $state ?>" required>
+                <label for="zipcode">Zipcode</label><input id="input_field" name="zipcode" style="width: 80px;"
+                    maxlength="5" type="number" value="<?php echo $zipcode ?>" required>
                 <div style="text-align: center;"><button type="submit" name="pf_submit_button">Save</button>
                 </div>
             </form>

@@ -67,7 +67,7 @@ try {
                         $product_price = $result2['product_price'];
                         $product_id = $result2['product_id'];
                         $html = '<form action="cart_function.php" method="POST"><input id="product_id" name="product_id" type="text" value="' . $product_id . '" readonly="readonly"></input><h4>' . $product_name . '</h4>
-                                <p>Price: $' . $product_price . '/Gallon</p><div id="buying"><a style="margin-right: 5px;">Gallon  </a><input id="gallon" name="quantity"  type="number" value="1"></input><button name="add_to_cart">Add to Cart</button></div></form>';
+                                <p>Price: $' . $product_price . '/Gallon</p><div id="buying"><a style="margin-right: 5px;">Gallon  </a><input id="gallon" name="quantity"  type="number" value="1" min="1"></input><button name="add_to_cart">Add to Cart</button></div></form>';
                         echo $html;
                     }
                 }

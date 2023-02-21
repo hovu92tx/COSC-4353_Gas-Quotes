@@ -96,7 +96,7 @@ try {
                                         <th id="item_id"><input id="infor" name="product_id" type="text" value="' . $product_id . '" readonly="readonly"></input></th>
                                         <th id="name">' . $product_name . '</th>
                                         <th id="price">$' . $product_price . '</th>
-                                        <th id="quantity"><input id="quantity_input" name="quantity" type="number" value="' . $quantity . '" ></input><button type="submit" name="update">Update</button></th>
+                                        <th id="quantity"><input id="quantity_input" name="quantity" type="number" value="' . $quantity . '" min= "1"></input><button type="submit" name="update">Update</button></th>
                                         <th id="total">$' . $total . '</th>
                                         <th><button type="submit" name="remove">Remove</button></th>
                                     </tr>

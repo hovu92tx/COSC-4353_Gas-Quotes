@@ -47,7 +47,7 @@ try {
                 </div>
                 <div class="vertical-menu">
                     <a href="dashboard.php">Home</a>
-                    <a href="cart.php">Cart</a>
+                    <a href="cart.php">Cart (<?php echo $_SESSION['numberOfOrder'] ?>)</a>
                     <a href="orders.php" class="active">Orders</a>
                     <a href="profile.php">Profile</a>
                     <a href="logout_action.php">Log Out</a>

@@ -9,6 +9,10 @@ body {
     background-color: rgb(18, 130, 242);
 }
 
+#section1 {
+    display: flex;
+}
+
 #left_box {
     float: left;
     width: 25%;
