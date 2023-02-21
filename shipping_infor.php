@@ -87,7 +87,7 @@ try {
                     <input id="date" name="date" type="date" min="<?php echo date('Y-m-d'); ?>" required>
                 </section>
                 <section>
-                    <a id="back_button" href="cart.php">Back</a>
+                    <button style="float:left" onclick="document.location='cart.php'">Back</button>
                     <button type="submit" name="place_order_button">Review Order</button>
                 </section>
             </form>

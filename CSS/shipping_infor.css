@@ -50,3 +50,34 @@ button {
     border: none;
     background-color: rgb(65, 98, 246);
 }
+
+button:hover {
+    background-color: rgb(3, 33, 167);
+}
+
+ul {
+    width: 25%;
+    list-style-type: none;
+    margin: auto;
+    padding: 0;
+    overflow: hidden;
+}
+
+li {
+    text-align: center;
+    width: 200px;
+    background-color: rgb(65, 98, 246);
+    margin-left: 20px;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover:not(.active) {
+    background-color: #0129a2;
+}
