@@ -3,6 +3,7 @@ session_start();
 require('connect.php');
 $_SESSION['username'] = '';
 $_SESSION['userid'] = '';
+$_SESSION['numberOfOrder'] = 0;
 $_SESSION['cart'] = array();
 error_reporting(0);
 ?>

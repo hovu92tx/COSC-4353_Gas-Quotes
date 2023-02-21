@@ -9,15 +9,18 @@ body {
     background-color: rgb(18, 130, 242);
 }
 
-#section1 {
-    display: flex;
-}
-
 #left_box {
     float: left;
     width: 25%;
     height: 300px;
     border: solid black 1px;
+}
+
+#right_box {
+    float: left;
+    width: 75%;
+    border: solid black 1px;
+    min-height: 700px;
 }
 
 .vertical-menu {
@@ -38,38 +41,4 @@ body {
 .vertical-menu a.active {
     background-color: #0505f5;
     color: white;
-}
-
-#right_box {
-    float: left;
-    width: 75%;
-    border: solid black 1px;
-    min-height: 700px;
-}
-
-#quote_form {
-    float: left;
-    text-align: center;
-    width: 48%;
-    border: solid black 1px;
-    background-color: rgb(97, 148, 243);
-    margin: 5px;
-    padding: 5px;
-}
-
-#buying {
-    text-align: right;
-}
-
-#numberofgallon {
-    width: 40px;
-    margin: 5px;
-}
-
-#product_id {
-    float: left;
-    text-align: center;
-    width: 15px;
-    border: none;
-    background-color: rgb(97, 148, 243);
 }

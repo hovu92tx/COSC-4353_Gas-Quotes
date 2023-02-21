@@ -29,7 +29,7 @@ try {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="CSS/dashboard.css">
-    <link rel="stylesheet" href="CSS/dashboard_sup.css">
+    <link rel="stylesheet" href="CSS/thank_you.css">
     <script src="clock.js"></script>
 </head>
 
@@ -52,38 +52,16 @@ try {
             </div>
         </div>
         <div id="right_box">
-            <h2 style="text-align: center;">Prices of gas in <?php echo $_SESSION['location'] ?></h2>
-            <div style=" text-align: center; margin: 10px;">
-                <span id='ct7'></span>
-            </div>
-            <?php
-            try {
-                $sql2 = "SELECT * FROM products";
-                $statement2 = $conn->query($sql2);
-                $results2 = $statement2->fetchAll(PDO::FETCH_ASSOC);
-                if ($results2) {
-                    foreach ($results2 as $result2) {
-                        $product_name = $result2['product_name'];
-                        $product_price = $result2['product_price'];
-                        $product_id = $result2['product_id'];
-                        $html = '<form action="cart_function.php" method="POST"><input id="product_id" name="product_id" type="text" value="' . $product_id . '" readonly="readonly"></input><h4>' . $product_name . '</h4>
-                                <p>Price: $' . $product_price . '/Gallon</p><div id="buying"><a style="margin-right: 5px;">Gallon  </a><input id="gallon" name="quantity"  type="number" value="1"></input><button name="add_to_cart">Add to Cart</button></div></form>';
-                        echo $html;
-                    }
-                }
-            } catch (PDOException $error) {
-                echo 'Connection fail!';
-            }
-            ?>
-            <div style="width:90%; margin: auto; clear: both;">
+            <h2 style="text-align: center;">Thank you for your order!</h2>
+            <div style="width:90%; margin: auto;">
                 <ul>
-                    <li><a href="cart.php">Go To Cart</a></li>
+                    <li><a href="dashboard.php">Continue Shopping</a></li>
                 </ul>
             </div>
         </div>
+
+
     </section>
-
-
 </body>
 <footer>
 </footer>

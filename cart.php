@@ -48,7 +48,7 @@ try {
                 </div>
                 <div class="vertical-menu">
                     <a href="dashboard.php">Home</a>
-                    <a href="cart.php" class="active">Cart</a>
+                    <a href="cart.php" class="active">Cart (<?php echo $_SESSION['numberOfOrder'] ?>)</a>
                     <a href="orders.php">Orders</a>
                     <a href="profile.php">Profile</a>
                     <a href="logout_action.php">Log Out</a>
@@ -73,7 +73,6 @@ try {
             <div id="list">
                 <?php
                 $_SESSION['order_total'] = 0;
-
                 if (empty($_SESSION['cart'])) {
                     $html = '<div style="text-align: center"><p>Cart is empty</p></div><ul><li><a href="dashboard.php">Start Shopping</a></li></ul>';
                     echo $html;
@@ -101,7 +100,7 @@ try {
                                         <th id="total">$' . $total . '</th>
                                         <th><button type="submit" name="remove">Remove</button></th>
                                     </tr>
-                                </table>';
+                                </table></form>';
                                     echo $html;
                                 }
                             }
@@ -110,7 +109,7 @@ try {
                         }
                     }
                     echo '<div id="order_total"><h2>Order Total: $' . $order_total . ' </h2></div><ul>
-                    <li><a href="shipping_infor.php">Place Order</a></li>
+                    <li><a href="shipping_infor.php">Continue</a></li>
                     <li><a href="dashboard.php">Continue Shopping</a></li>
                     <li><a href="clear_cart.php">Clear Cart</a></li>
                   </ul>';

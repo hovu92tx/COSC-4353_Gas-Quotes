@@ -30,3 +30,11 @@ form {
     width: 600px;
     margin: 15px;
 }
+
+#button {
+    width: 80px;
+    height: 40px;
+    margin: 15px;
+    color: white;
+    background-color: rgb(65, 98, 246);
+}

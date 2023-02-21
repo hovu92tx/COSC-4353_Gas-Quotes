@@ -74,7 +74,8 @@ try {
                 <label for="city">City</label><input id="input_field" name="city" type="text" style="width: 120px;" value="<?php echo $city ?>" required>
                 <label for="state">State</label><input id="input_field" name="state" style="width: 80px;" type="text" value="<?php echo $state ?>" required>
                 <label for="zipcode">Zipcode</label><input id="input_field" name="zipcode" style="width: 80px;" maxlength="5" type="number" value="<?php echo $zipcode ?>" required>
-                <div style="text-align: center;"><button type="submit" name="pf_submit_button">Save</button></div>
+                <div style="text-align: center;"><button type="submit" name="pf_submit_button">Save</button>
+                </div>
             </form>
         </div>
     </section>
