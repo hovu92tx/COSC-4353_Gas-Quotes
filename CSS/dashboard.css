@@ -23,8 +23,8 @@ body {
 #right_box {
     float: left;
     width: 75%;
-    border: solid black 1px;
     min-height: 700px;
+    border: solid black 2px;
 }
 
 .vertical-menu {

@@ -109,7 +109,7 @@ if (isset($_POST['place_order_button'])) {
                 <ul>
                     <li><a href="place_order.php">Place Order</a></li>
                     <li><a href="cart.php">Modify Order</a></li>
-                </ul>';
+                </ul>
             </div>
         </div>
 

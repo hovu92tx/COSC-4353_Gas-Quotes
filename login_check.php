@@ -9,7 +9,6 @@ try {
         if (!empty($_POST['username']) && !empty($_POST['password'])) {
             $uname = $_POST['username'];
             $pass = $_POST['password'];
-
             $sql = "SELECT * FROM users WHERE username LIKE '$uname'";
             $statement = $conn->query($sql);
             $results = $statement->fetchAll(PDO::FETCH_ASSOC);

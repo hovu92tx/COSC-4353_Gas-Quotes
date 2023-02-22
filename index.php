@@ -5,6 +5,7 @@ $_SESSION['username'] = '';
 $_SESSION['userid'] = '';
 $_SESSION['numberOfOrder'] = 0;
 $_SESSION['cart'] = array();
+$_SESSION['mess'] = '';
 error_reporting(0);
 ?>
 <!DOCTYPE html>

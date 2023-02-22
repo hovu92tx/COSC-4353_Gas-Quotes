@@ -56,6 +56,12 @@ try {
             <div style=" text-align: center; margin: 10px;">
                 <span id='ct7'></span>
             </div>
+            <div style="margin: auto; width: 98%;  background-color: lightgreen; text-align: center;">
+                <?php
+                echo $_SESSION['mess'];
+                $_SESSION['mess'] = '';
+                ?>
+            </div>
             <?php
             try {
                 $sql2 = "SELECT * FROM products";

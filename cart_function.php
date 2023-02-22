@@ -1,6 +1,6 @@
 <?php
 session_start();
-error_reporting(0);
+$_SESSION['mess'] = '';
 
 // Check if the "cart" array exists in the session
 if (!isset($_SESSION['cart'])) {
@@ -16,9 +16,11 @@ if (isset($_POST['add_to_cart'])) {
     // If the product is already in the cart, update the quantity
     if (isset($_SESSION['cart'][$product_id])) {
         $_SESSION['cart'][$product_id] += $quantity;
+        $_SESSION['mess'] = 'Added to your cart!';
     } else {
         // Otherwise, add the product to the cart
         $_SESSION['cart'][$product_id] = $quantity;
+        $_SESSION['mess'] = 'Added to your cart!';
     }
     $_SESSION['numberOfOrder'] = count($_SESSION['cart']);
     header('location:dashboard.php');
