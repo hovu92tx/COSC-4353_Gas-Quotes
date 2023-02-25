@@ -49,7 +49,7 @@ try {
                             }
                         }
                     } else {
-                        echo ("<script LANGUAGE='JavaScript'>window.alert('Login Fail! Please Login again');window.location.href='http://localhost/COSC-4353_Group-Project-/index.php';</script>");
+                        echo ("<script LANGUAGE='JavaScript'>alert('Login Fail! Please Login again');window.location.href='http://localhost/COSC-4353_Group-Project-/index.php';</script>");
                     }
                 }
             } else {
