@@ -38,4 +38,4 @@ error_reporting(0);
 <footer>
 </footer>
 
-</html>
+</html>    
