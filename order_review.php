@@ -91,7 +91,7 @@ if (isset($_POST['place_order_button'])) {
                                         <th id="name">' . $product_name . '</th>
                                         <th id="price">$' . $product_price . '</th>
                                         <th id="quantity"><input id="quantity_input" name="quantity" type="number" value="' . $quantity . '"readonly="readonly" ></input></th>
-                                        <th id="total">$' . $total . '</th>
+                                        <th id="total">$' . number_format($total, 2) . '</th>
                                         <th></th>
                                     </tr>
                                 </table></form>';
@@ -102,7 +102,7 @@ if (isset($_POST['place_order_button'])) {
                         echo 'Connection fail!';
                     }
                 }
-                echo '<div id="order_total"><h2>Order Total: $' . $order_total . ' </h2></div>';
+                echo '<div id="order_total"><h2>Order Total: $' . number_format($order_total, 2) . ' </h2></div>';
             }
             ?>
             <div style="width:90%; margin: auto;">
