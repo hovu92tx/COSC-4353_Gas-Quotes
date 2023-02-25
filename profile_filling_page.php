@@ -15,3 +15,16 @@ error_reporting(0);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="CSS/profile_filling_page.css">
 </head>
+
+<body>
+    <header id="company_name">
+        ABC Company
+    </header>
+    <section>
+        <div id="center_box">
+            <h4>Please create your profile before using our service!</h4>
+            <form action="profile_filling_action.php" method="POST">
+                <label for="name">Full Name:</label><input id="input_field" name="name" type="text" required><br>
+                <label for="address1">Address #1</label><input id="input_field" name="address1" type="text" required><br>
+                <label for="address2">Address #2</label><input id="input_field" name="address2" type="text"><br>
+    
