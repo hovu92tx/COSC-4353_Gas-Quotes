@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 25, 2023 at 07:46 AM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.2.0
+-- Generation Time: Mar 24, 2023 at 05:10 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -30,12 +30,52 @@ SET time_zone = "+00:00";
 CREATE TABLE `orders` (
   `order_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `order_product_name` text NOT NULL,
-  `order_unit_price` double NOT NULL,
   `order_total` double NOT NULL,
-  `order_date` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `order_date` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`order_id`, `user_id`, `order_total`, `order_date`) VALUES
+(28, 1007, 15.75, '2023-03-24 06:57:50'),
+(29, 1007, 54.55, '2023-03-24 06:58:49');
+
+--
+-- Triggers `orders`
+--
+DELIMITER $$
+CREATE TRIGGER `delete order` BEFORE DELETE ON `orders` FOR EACH ROW DELETE FROM order_detail WHERE order_id=OLD.order_id
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_detail`
+--
+
+CREATE TABLE `order_detail` (
+  `order_detail_id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `order_detail_unit_price` double NOT NULL,
+  `order_detail_quantity` int(11) NOT NULL,
+  `order_detail_total` double NOT NULL,
+  `order_detail_delivery_date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `order_detail`
+--
+
+INSERT INTO `order_detail` (`order_detail_id`, `order_id`, `product_id`, `order_detail_unit_price`, `order_detail_quantity`, `order_detail_total`, `order_detail_delivery_date`) VALUES
+(17, 28, 87, 3.05, 3, 9.15, '2023-03-25'),
+(18, 28, 89, 3.3, 2, 6.6, '2023-03-25'),
+(19, 29, 87, 3.05, 3, 9.15, '2023-03-25'),
+(20, 29, 89, 3.3, 3, 9.9, '2023-03-25'),
+(21, 29, 93, 3.55, 10, 35.5, '2023-03-25');
 
 -- --------------------------------------------------------
 
@@ -48,7 +88,7 @@ CREATE TABLE `products` (
   `product_name` text NOT NULL,
   `product_price` double NOT NULL,
   `image_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `products`
@@ -69,7 +109,7 @@ CREATE TABLE `users` (
   `userid` int(11) NOT NULL,
   `username` text NOT NULL,
   `password` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
@@ -102,14 +142,14 @@ CREATE TABLE `user_profiles` (
   `city` text DEFAULT '0',
   `state` text DEFAULT '0',
   `zipcode` int(5) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `user_profiles`
 --
 
 INSERT INTO `user_profiles` (`userid`, `name`, `address1`, `address2`, `city`, `state`, `zipcode`) VALUES
-(1003, 'dasdasdsa', 'dasas', 'dsdas', 'housotn', 'TX', 77095),
+(1003, '0', '0', '0', '0', '0', 0),
 (1007, 'VU HO', '16419 Lasting Light Lane', '0', 'Houston', 'TX', 77095),
 (1008, '0', '0', '0', '0', '0', 0);
 
@@ -121,7 +161,16 @@ INSERT INTO `user_profiles` (`userid`, `name`, `address1`, `address2`, `city`, `
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
-  ADD PRIMARY KEY (`order_id`);
+  ADD PRIMARY KEY (`order_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `order_detail`
+--
+ALTER TABLE `order_detail`
+  ADD PRIMARY KEY (`order_detail_id`),
+  ADD KEY `order_id` (`order_id`),
+  ADD KEY `product_id` (`product_id`);
 
 --
 -- Indexes for table `products`
@@ -150,7 +199,13 @@ ALTER TABLE `user_profiles`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+
+--
+-- AUTO_INCREMENT for table `order_detail`
+--
+ALTER TABLE `order_detail`
+  MODIFY `order_detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -163,10 +218,24 @@ ALTER TABLE `users`
 --
 
 --
+-- Constraints for table `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`userid`);
+
+--
+-- Constraints for table `order_detail`
+--
+ALTER TABLE `order_detail`
+  ADD CONSTRAINT `order_detail_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`),
+  ADD CONSTRAINT `order_detail_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
+
+--
 -- Constraints for table `user_profiles`
 --
 ALTER TABLE `user_profiles`
-  ADD CONSTRAINT `user_profiles_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`userid`);
+  ADD CONSTRAINT `user_profiles_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`userid`),
+  ADD CONSTRAINT `user_profiles_ibfk_2` FOREIGN KEY (`userid`) REFERENCES `users` (`userid`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
