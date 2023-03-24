@@ -2,6 +2,7 @@
 session_start();
 require 'connect.php';
 $name = "#";
+$order_total = 0;
 #error_reporting(0);
 try {
     $userid = $_SESSION['userid'];
@@ -72,7 +73,6 @@ try {
             </div>
             <div id="list">
                 <?php
-                $_SESSION['order_total'] = 0;
                 if (empty($_SESSION['cart'])) {
                     $html = '<div style="text-align: center"><p>Cart is empty</p></div><ul><li><a href="dashboard.php">Start Shopping</a></li></ul>';
                     echo $html;
@@ -88,8 +88,7 @@ try {
                                     $product_name = $result2['product_name'];
                                     $product_price = $result2['product_price'];
                                     $total = $quantity * $product_price;
-                                    $_SESSION['order_total'] += $total;
-                                    $order_total = $_SESSION['order_total'];
+                                    $order_total += $total;
                                     $html = '<form id="item" action="cart_function.php" method="POST">
                                 <table>
                                     <tr>
@@ -108,6 +107,7 @@ try {
                             echo 'Connection fail!';
                         }
                     }
+                    $_SESSION['order_total'] = $order_total;
                     echo '<div id="order_total"><h2>Order Total: $' . $order_total . ' </h2></div><ul>
                     <li><a href="shipping_infor.php">Continue</a></li>
                     <li><a href="dashboard.php">Continue Shopping</a></li>

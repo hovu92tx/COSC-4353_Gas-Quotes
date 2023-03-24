@@ -8,7 +8,7 @@ if (isset($_POST['place_order_button'])) {
     $city = $_POST['city'];
     $state = $_POST['state'];
     $zipcode = $_POST['zipcode'];
-    $date = $_POST['date'];
+    $_SESSION['delivery_date'] = $_POST['date'];
 }
 ?>
 <!DOCTYPE html>
@@ -49,9 +49,8 @@ if (isset($_POST['place_order_button'])) {
                 <h4>Shipping address:
                     <?php echo ' ' . $address . ', ' . $city . ', ' . $state . ', ' . $zipcode ?>
                 </h4>
-                <h4>Delivery date:<?php echo ' ' . $date ?></h4>
+                <h4>Delivery date:<?php echo ' ' . $_SESSION['delivery_date'] ?></h4>
             </div>
-
             <h3>Order Detail:</h3>
             <div>
                 <table>
@@ -66,7 +65,6 @@ if (isset($_POST['place_order_button'])) {
                 </table>
             </div>
             <?php
-            $_SESSION['order_total'] = 0;
             if (empty($_SESSION['cart'])) {
                 $html = '<div style="text-align: center"><p>Cart is empty</p></div><ul><li><a href="dashboard.php">Start Shopping</a></li></ul>';
                 echo $html;
@@ -82,8 +80,6 @@ if (isset($_POST['place_order_button'])) {
                                 $product_name = $result2['product_name'];
                                 $product_price = $result2['product_price'];
                                 $total = $quantity * $product_price;
-                                $_SESSION['order_total'] += $total;
-                                $order_total = $_SESSION['order_total'];
                                 $html = '<form id="item" action="cart_function.php" method="POST">
                                 <table>
                                     <tr>
@@ -102,7 +98,9 @@ if (isset($_POST['place_order_button'])) {
                         echo 'Connection fail!';
                     }
                 }
-                echo '<div id="order_total"><h2>Order Total: $' . $order_total . ' </h2></div>';
+
+
+                echo '<div id="order_total"><h2>Order Total: $' . $_SESSION['order_total'] . ' </h2></div>';
             }
             ?>
             <div style="width:90%; margin: auto;">
