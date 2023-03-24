@@ -30,7 +30,7 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="CSS/dashboard.css">
     <link rel="stylesheet" href="CSS/thank_you.css">
-    <script src="clock.js"></script>
+    <script src="confirm.js"></script>
 </head>
 
 <body>
@@ -48,7 +48,7 @@ try {
                 <a href="cart.php">Cart (<?php echo $_SESSION['numberOfOrder'] ?>)</a>
                 <a href="orders.php">Orders</a>
                 <a href="profile.php">Profile</a>
-                <a href="logout_action.php">Log Out</a>
+                <a onclick="showConfirm()">Log Out</a>
             </div>
         </div>
         <div id="right_box">

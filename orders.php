@@ -29,7 +29,7 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="CSS/dashboard.css">
     <link rel="stylesheet" href="CSS/orders.css">
-    <script src="clock.js"></script>
+    <script src="confirm.js"></script>
 </head>
 
 <body>
@@ -38,17 +38,18 @@ try {
     </header>
     <section id="section1">
         <div id="left_box">
-            <div style="text-align:center; padding: 5px;"><label for=" name">
-                    <h3><b>Welcome:</b>
-                </label><?php echo $name ?></h3>
-            </div>
-            <div class="vertical-menu">
-                <a href="dashboard.php">Home</a>
-                <a href="Cart.php">Cart (<?php echo $_SESSION['numberOfOrder'] ?>)</a>
-                <a href="orders.php" class="active">Orders</a>
-                <a href="profile.php">Profile</a>
-                <a href="logout_action.php">Log Out</a>
-            </div>
+            <form style="text-align: left;" action="logout_action.php" method="POST">
+                <div style="text-align:center; padding: 5px;"><label for=" name">
+                        <h3><b>Welcome:</b>
+                    </label><?php echo $name ?></h3>
+                </div>
+                <div class="vertical-menu">
+                    <a href="dashboard.php">Home</a>
+                    <a href="cart.php">Cart (<?php echo $_SESSION['numberOfOrder'] ?>)</a>
+                    <a href="orders.php" class="active">Orders</a>
+                    <a href="profile.php">Profile</a>
+                    <a href="logout_action.php">Log Out</a>
+                </div>
         </div>
         <div id="right_box">
             <h2 style="text-align: center;">Order History</h2>

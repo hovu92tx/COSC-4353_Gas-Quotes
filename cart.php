@@ -33,7 +33,7 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="CSS/dashboard.css">
     <link rel="stylesheet" href="CSS/cart.css">
-    <script src="clock.js"></script>
+    <script src="confirm.js"></script>
 </head>
 
 <body>
@@ -52,7 +52,7 @@ try {
                     <a href="cart.php" class="active">Cart (<?php echo $_SESSION['numberOfOrder'] ?>)</a>
                     <a href="orders.php">Orders</a>
                     <a href="profile.php">Profile</a>
-                    <a href="logout_action.php">Log Out</a>
+                    <a onclick="showConfirm()">Log Out</a>
                 </div>
         </div>
         </form>
@@ -88,7 +88,8 @@ try {
                                     $product_name = $result2['product_name'];
                                     $product_price = $result2['product_price'];
                                     $total = $quantity * $product_price;
-                                    $order_total += $total;
+                                    $_SESSION['order_total'] += $total;
+                                    $order_total = $_SESSION['order_total'];
                                     $html = '<form id="item" action="cart_function.php" method="POST">
                                 <table>
                                     <tr>
@@ -96,7 +97,7 @@ try {
                                         <th id="name">' . $product_name . '</th>
                                         <th id="price">$' . $product_price . '</th>
                                         <th id="quantity"><input id="quantity_input" name="quantity" type="number" value="' . $quantity . '" min= "1"></input><button type="submit" name="update">Update</button></th>
-                                        <th id="total">$' . $total . '</th>
+                                        <th id="total">$' . number_format($total, 2) . '</th>
                                         <th><button type="submit" name="remove">Remove</button></th>
                                     </tr>
                                 </table></form>';
@@ -107,7 +108,6 @@ try {
                             echo 'Connection fail!';
                         }
                     }
-                    $_SESSION['order_total'] = $order_total;
                     echo '<div id="order_total"><h2>Order Total: $' . $order_total . ' </h2></div><ul>
                     <li><a href="shipping_infor.php">Continue</a></li>
                     <li><a href="dashboard.php">Continue Shopping</a></li>

@@ -21,7 +21,7 @@ if (isset($_POST['place_order_button'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="CSS/dashboard.css">
     <link rel="stylesheet" href="CSS/order_review.css">
-    <script src="clock.js"></script>
+    <script src="confirm.js"></script>
 </head>
 
 <body>
@@ -39,7 +39,7 @@ if (isset($_POST['place_order_button'])) {
                 <a href="Cart.php" class="active">Cart (<?php echo $_SESSION['numberOfOrder'] ?>)</a>
                 <a href="orders.php">Orders</a>
                 <a href="profile.php">Profile</a>
-                <a href="logout_action.php">Log Out</a>
+                <a onclick="showConfirm()">Log Out</a>
             </div>
         </div>
         <div id="right_box">
@@ -87,7 +87,7 @@ if (isset($_POST['place_order_button'])) {
                                         <th id="name">' . $product_name . '</th>
                                         <th id="price">$' . $product_price . '</th>
                                         <th id="quantity"><input id="quantity_input" name="quantity" type="number" value="' . $quantity . '"readonly="readonly" ></input></th>
-                                        <th id="total">$' . $total . '</th>
+                                        <th id="total">$' . number_format($total, 2) . '</th>
                                         <th></th>
                                     </tr>
                                 </table></form>';
@@ -98,9 +98,7 @@ if (isset($_POST['place_order_button'])) {
                         echo 'Connection fail!';
                     }
                 }
-
-
-                echo '<div id="order_total"><h2>Order Total: $' . $_SESSION['order_total'] . ' </h2></div>';
+                echo '<div id="order_total"><h2>Order Total: $' . $order_total . ' </h2></div>';
             }
             ?>
             <div style="width:90%; margin: auto;">

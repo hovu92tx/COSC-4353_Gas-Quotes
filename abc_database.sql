@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 18, 2023 at 11:59 PM
+-- Generation Time: Feb 25, 2023 at 07:46 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -76,7 +76,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`userid`, `username`, `password`) VALUES
-(1003, 'group', '12345678');
+(1003, 'group', '12345678'),
+(1007, 'hovu92tx', 'nhithieugia'),
+(1008, 'hovu92dk', 'nhithieugia');
 
 --
 -- Triggers `users`
@@ -107,7 +109,9 @@ CREATE TABLE `user_profiles` (
 --
 
 INSERT INTO `user_profiles` (`userid`, `name`, `address1`, `address2`, `city`, `state`, `zipcode`) VALUES
-(1003, '0', '0', '0', '0', '0', 0);
+(1003, 'dasdasdsa', 'dasas', 'dsdas', 'housotn', 'TX', 77095),
+(1007, 'VU HO', '16419 Lasting Light Lane', '0', 'Houston', 'TX', 77095),
+(1008, '0', '0', '0', '0', '0', 0);
 
 --
 -- Indexes for dumped tables
@@ -152,7 +156,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1007;
+  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1009;
 
 --
 -- Constraints for dumped tables
