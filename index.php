@@ -3,6 +3,12 @@ session_start();
 require('connect.php');
 $_SESSION['username'] = '';
 $_SESSION['userid'] = '';
+$_SESSION['cus_name'] = "#";
+$_SESSION['cus_add1'] = "#";
+$_SESSION['cus_add2'] = "#";
+$_SESSION['cus_city'] = "#";
+$_SESSION['cus_state'] = "#";
+$_SESSION['cus_zipcode'] = "#";
 $_SESSION['numberOfOrder'] = 0;
 $_SESSION['cart'] = array();
 $_SESSION['mess'] = '';
@@ -31,9 +37,11 @@ error_reporting(0);
             <form action="login_check.php" method="POST">
                 <h2>Login</h2>
                 <div style="text-align: right; margin-right: 70px ;">
-                    <label for="username" style="margin-right: 10px;"><b>User name</b></label><input id="login_input" type="text" placeholder="User Name" name="username" maxlength="50" require>
+                    <label for="username" style="margin-right: 10px;"><b>User name</b></label><input id="login_input"
+                        type="text" placeholder="User Name" name="username" maxlength="50" require>
                     <br>
-                    <label for="password" style="margin-right: 10px;"><b>Password</b></label><input id="login_input" type="password" placeholder="Password" name="password" maxlength="50" required>
+                    <label for="password" style="margin-right: 10px;"><b>Password</b></label><input id="login_input"
+                        type="password" placeholder="Password" name="password" maxlength="50" required>
                 </div>
 
                 <div id="login_button"><button type="submit" name="login_button">Submit</button></div>

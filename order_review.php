@@ -3,11 +3,6 @@ session_start();
 require 'connect.php';
 error_reporting(0);
 if (isset($_POST['place_order_button'])) {
-    $name = $_POST['name'];
-    $address = $_POST['address'];
-    $city = $_POST['city'];
-    $state = $_POST['state'];
-    $zipcode = $_POST['zipcode'];
     $_SESSION['delivery_date'] = $_POST['date'];
 }
 ?>
@@ -47,7 +42,7 @@ if (isset($_POST['place_order_button'])) {
             <div style="width:90%; margin:auto;">
                 <h4>Customer name: <?php echo ' ' . $name ?></h4>
                 <h4>Shipping address:
-                    <?php echo ' ' . $address . ', ' . $city . ', ' . $state . ', ' . $zipcode ?>
+                    <?php echo ' ' . $_SESSION['cus_add1'] . ', ' . $_SESSION['cus_city'] . ', ' . $_SESSION['cus_state'] . ', ' . $_SESSION['cus_zipcode'] ?>
                 </h4>
                 <h4>Delivery date:<?php echo ' ' . $_SESSION['delivery_date'] ?></h4>
             </div>
@@ -79,7 +74,7 @@ if (isset($_POST['place_order_button'])) {
                             foreach ($results2 as $result2) {
                                 $product_name = $result2['product_name'];
                                 $product_price = $result2['product_price'];
-                                $total = $quantity * $product_price;
+                                $total = $product_price * $quantity;
                                 $html = '<form id="item" action="cart_function.php" method="POST">
                                 <table>
                                     <tr>
@@ -98,7 +93,7 @@ if (isset($_POST['place_order_button'])) {
                         echo 'Connection fail!';
                     }
                 }
-                echo '<div id="order_total"><h2>Order Total: $' . $order_total . ' </h2></div>';
+                echo '<div id="order_total"><h2>Order Total: $' . number_format($_SESSION['order_total'], 2) . ' </h2></div>';
             }
             ?>
             <div style="width:90%; margin: auto;">
