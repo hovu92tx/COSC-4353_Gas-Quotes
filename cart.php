@@ -1,27 +1,8 @@
 <?php
 session_start();
 require 'connect.php';
-$name = "#";
+error_reporting(0);
 $order_total = 0;
-#error_reporting(0);
-try {
-    $userid = $_SESSION['userid'];
-    $sql = "SELECT * FROM user_profiles WHERE userid LIKE '$userid'";
-    $statement = $conn->query($sql);
-    $results = $statement->fetchAll(PDO::FETCH_ASSOC);
-    if ($results) {
-        foreach ($results as $result) {
-            $name = $result['name'];
-            $address = $result['address1'];
-            $city = $result['city'];
-            $state = $result['state'];
-            $zipcode = $result['zipcode'];
-        }
-    }
-} catch (PDOException $error) {
-    return $error;
-}
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -45,7 +26,7 @@ try {
             <form style="text-align: left;" action="logout_action.php" method="POST">
                 <div style="text-align:center; padding: 5px;"><label for=" name">
                         <h3><b>Welcome:</b>
-                    </label><?php echo $name ?></h3>
+                    </label><?php echo $_SESSION['cus_name'] ?></h3>
                 </div>
                 <div class="vertical-menu">
                     <a href="dashboard.php">Home</a>
@@ -88,8 +69,7 @@ try {
                                     $product_name = $result2['product_name'];
                                     $product_price = $result2['product_price'];
                                     $total = $quantity * $product_price;
-                                    $_SESSION['order_total'] += $total;
-                                    $order_total = $_SESSION['order_total'];
+                                    $order_total += $total;
                                     $html = '<form id="item" action="cart_function.php" method="POST">
                                 <table>
                                     <tr>
@@ -108,7 +88,8 @@ try {
                             echo 'Connection fail!';
                         }
                     }
-                    echo '<div id="order_total"><h2>Order Total: $' . $order_total . ' </h2></div><ul>
+                    $_SESSION['order_total'] = $order_total;
+                    echo '<div id="order_total"><h2>Order Total: $' . $_SESSION['order_total'] . ' </h2></div><ul>
                     <li><a href="shipping_infor.php">Continue</a></li>
                     <li><a href="dashboard.php">Continue Shopping</a></li>
                     <li><a href="clear_cart.php">Clear Cart</a></li>

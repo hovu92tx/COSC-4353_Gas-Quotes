@@ -4,7 +4,7 @@ require 'connect.php';
 error_reporting(0);
 date_default_timezone_set('America/Chicago');
 $userid = $_SESSION['userid'];
-$name = "#";
+
 
 try {
 
@@ -13,7 +13,12 @@ try {
     $results = $statement->fetchAll(PDO::FETCH_ASSOC);
     if ($results) {
         foreach ($results as $result) {
-            $name = $result['name'];
+            $_SESSION['cus_name'] = $result['name'];
+            $_SESSION['cus_add1'] = $result['address1'];
+            $_SESSION['cus_add2'] = $result['address2'];
+            $_SESSION['cus_city'] = $result['city'];
+            $_SESSION['cus_state'] = $result['state'];
+            $_SESSION['cus_zipcode'] = $result['zipcode'];
         }
     }
 } catch (PDOException $error) {
@@ -43,7 +48,7 @@ try {
         <div id="left_box">
             <div style="text-align:center; padding: 5px;"><label for=" name">
                     <h3><b>Welcome:</b>
-                </label><?php echo $name ?></h3>
+                </label><?php echo $_SESSION['cus_name'] ?></h3>
             </div>
             <div class=" vertical-menu">
                 <a href="dashboard.php" class="active">Home</a>

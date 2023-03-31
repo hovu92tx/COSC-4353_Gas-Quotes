@@ -38,7 +38,6 @@ try {
         $conn->query($sql3);
     }
 } catch (PDOException $error) {
-    echo "#";
 }
 unset($_SESSION['cart']);
 $_SESSION['numberOfOrder'] = 0;

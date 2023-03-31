@@ -11,8 +11,8 @@ form label {
 }
 
 button {
-    width: 120px;
-    margin: 5px;
+    width: 150px;
+    margin: auto;
     padding: 5px;
     color: white;
     text-align: center;
@@ -43,25 +43,12 @@ button {
     width: 15%;
 }
 
-#delivery_add {
-    width: 35%;
+#add {
+    width: 45%;
 }
 
 #total {
     width: 10%;
-}
-
-#detail {
-    width: 15%;
-}
-
-#order_total {
-    margin: auto;
-    text-align: center;
-    width: 90%;
-    border: none;
-    background-color: #dddddd;
-
 }
 
 .shop {
