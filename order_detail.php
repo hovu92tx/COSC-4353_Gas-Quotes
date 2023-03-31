@@ -104,7 +104,7 @@ try {
             } catch (PDOException $error) {
                 echo 'Connection fail!';
             }
-            echo '<div id="order_total"><h2>Order Total: $' . $order_total . ' </h2></div>';
+            echo '<div id="order_total"><h2>Order Total: $' . number_format($order_total, 2) . ' </h2></div>';
             ?>
             <div style="width:90%; margin: auto;">
                 <ul>

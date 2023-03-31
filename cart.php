@@ -89,7 +89,7 @@ $order_total = 0;
                         }
                     }
                     $_SESSION['order_total'] = $order_total;
-                    echo '<div id="order_total"><h2>Order Total: $' . $_SESSION['order_total'] . ' </h2></div><ul>
+                    echo '<div id="order_total"><h2>Order Total: $' . number_format($_SESSION['order_total'], 2) . ' </h2></div><ul>
                     <li><a href="shipping_infor.php">Continue</a></li>
                     <li><a href="dashboard.php">Continue Shopping</a></li>
                     <li><a href="clear_cart.php">Clear Cart</a></li>

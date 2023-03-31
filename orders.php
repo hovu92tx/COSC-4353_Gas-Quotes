@@ -1,7 +1,7 @@
 <?php
 session_start();
 require 'connect.php';
-/**error_reporting(0);*/
+error_reporting(0);
 ?>
 <!DOCTYPE html>
 <html>
@@ -60,7 +60,7 @@ require 'connect.php';
                                 <table>
                                     <tr>
                                         <th id="order_id"><input id="infor" name="order_id" type="text" value="' . $order_id . ' "readonly="readonly"></input></th>
-                                        <th id="date">' . $order_date . '</th>
+                                        <th id="date">' . date('m-d-Y', strtotime($order_date)) . '</th>
                                         <th id="add">' . $_SESSION['cus_add1'] . ', ' . $_SESSION['cus_city'] . ', ' . $_SESSION['cus_state'] . ', ' . $_SESSION['cus_zipcode'] . '</th>
                                         <th id="total">$' . number_format($order_total, 2) . '</th>
                                         <th id="action"><button type="submit" name="order_detail">Order Detail</button></th>

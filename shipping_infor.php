@@ -68,14 +68,11 @@ try {
                     <input id="input" name="address" type="text" value="<?php echo $address1 ?>" readonly='readonly'>
                 </section>
                 <section><label id="label" for="city">City</label>
-                    <input id="input" name="city" type="text" style="width: 120px;" value="<?php echo $city ?>"
-                        readonly='readonly'>
+                    <input id="input" name="city" type="text" style="width: 120px;" value="<?php echo $city ?>" readonly='readonly'>
                     <label id="label" for="state">State</label>
-                    <input id="input" name="state" style="width: 80px;" type="text" value="<?php echo $state ?>"
-                        readonly='readonly'>
+                    <input id="input" name="state" style="width: 80px;" type="text" value="<?php echo $state ?>" readonly='readonly'>
                     <label id="label" for="zipcode">Zipcode</label>
-                    <input id="input" name="zipcode" style="width: 80px;" maxlength="5" type="number"
-                        value="<?php echo $zipcode ?>" readonly='readonly'>
+                    <input id="input" name="zipcode" style="width: 80px;" maxlength="5" type="number" value="<?php echo $zipcode ?>" readonly='readonly'>
                 </section>
                 <section><label id="label" for=" date">Delivery Date </label>
                     <input id="date" name="date" type="date" min="<?php echo date('Y-m-d'); ?>" required>

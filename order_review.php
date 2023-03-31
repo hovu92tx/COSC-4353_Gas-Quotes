@@ -27,7 +27,7 @@ if (isset($_POST['place_order_button'])) {
         <div id="left_box">
             <div style="text-align:center; padding: 5px;"><label for=" name">
                     <h3><b>Welcome:</b>
-                </label><?php echo $name ?></h3>
+                </label><?php echo $_SESSION['cus_name'] ?></h3>
             </div>
             <div class="vertical-menu">
                 <a href="dashboard.php">Home</a>
@@ -40,7 +40,7 @@ if (isset($_POST['place_order_button'])) {
         <div id="right_box">
             <h2 style="text-align: center;">Order Review</h2>
             <div style="width:90%; margin:auto;">
-                <h4>Customer name: <?php echo ' ' . $name ?></h4>
+                <h4>Customer name: <?php echo ' ' . $_SESSION['cus_name'] ?></h4>
                 <h4>Shipping address:
                     <?php echo ' ' . $_SESSION['cus_add1'] . ', ' . $_SESSION['cus_city'] . ', ' . $_SESSION['cus_state'] . ', ' . $_SESSION['cus_zipcode'] ?>
                 </h4>
