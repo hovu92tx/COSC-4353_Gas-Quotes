@@ -11,7 +11,7 @@ if (!isset($_SESSION['cart'])) {
 if (isset($_POST['add_to_cart'])) {
     // Get the product ID and quantity from the form
     $product_id = $_POST['product_id'];
-    $quantity = $_POST['quantity'];
+    $quantity = $_POST['product_quantity'];
 
     // If the product is already in the cart, update the quantity
     if (isset($_SESSION['cart'][$product_id])) {

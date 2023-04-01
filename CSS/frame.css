@@ -1,0 +1,280 @@
+/*frame*/
+header {
+    margin: auto;
+    padding: 0.5em;
+    text-align: center;
+    color: aqua;
+    font-size: 4em;
+}
+
+aside {
+    float: left;
+    width: 25%;
+    padding: 0.5em;
+    border: solid aqua 0.2em;
+}
+
+section {
+    float: left;
+    padding: 0.5em;
+    width: 72%;
+    text-align: center;
+    border: solid aqua 0.2em;
+
+}
+
+#button_link {
+    display: inline-block;
+    margin: 1em;
+    clear: both;
+    padding: 1em;
+    height: 1em;
+    width: 8em;
+    background-color: rgb(82, 82, 247);
+    border-radius: 2em;
+    color: white;
+    text-decoration: none;
+}
+
+#button_link:hover {
+    background-color: rgb(34, 34, 248);
+}
+
+#form_button {
+    width: 7em;
+    padding: 0.4em;
+    border-radius: 1em;
+    background-color: rgb(82, 82, 247);
+    color: white;
+    border: none;
+}
+
+#form_button:hover {
+    background-color: rgb(34, 34, 248);
+}
+
+/*login template*/
+/*----LOGIN FORM----
+* Using id for each element helps to identify the element easier when using this template with others.  
+*/
+#login_form {
+    margin: auto;
+    text-align: center;
+    padding: 1em;
+    height: fit-content;
+    width: fit-content;
+}
+
+#login_h2 {
+    text-align: center;
+    color: rgb(73, 202, 202);
+}
+
+#login_label {
+    display: inline-block;
+    width: 6em;
+    text-align: left;
+    margin: 0.5em;
+    color: rgb(6, 160, 160);
+}
+
+#login_input {
+    display: inline-block;
+    width: 15em;
+    height: 1em;
+}
+
+#login_button {
+    width: 7em;
+    height: 2em;
+    margin: 1em;
+    background-color: rgb(48, 235, 248);
+    border-radius: 2em;
+    border: none;
+}
+
+#login_button:hover {
+    background-color: rgb(6, 116, 136);
+    color: aliceblue;
+}
+
+#login_a {
+    margin: 1em;
+}
+
+/* Menu Template*/
+.vertical-menu {
+    text-align: center;
+}
+
+.vertical-menu a {
+    color: black;
+    display: block;
+    padding: 12px;
+    text-decoration: none;
+}
+
+.vertical-menu a:hover {
+    background-color: #ccc;
+}
+
+.vertical-menu a.active {
+    background-color: rgb(48, 235, 248);
+    color: white;
+}
+
+/*Quote Form*/
+/*Add attributes for the form*/
+#quote_form_container {
+    float: left;
+    margin: 0.5em;
+    width: 48%;
+}
+
+#quote_form {
+    margin: auto;
+    padding: 0.5em;
+    text-align: center;
+    width: 80%;
+    height: fit-content;
+    background-color: rgb(20, 233, 215);
+    border: solid rgb(91, 253, 91) 0.2em;
+    border-radius: 2em;
+}
+
+#quote_form_h3 {
+    display: inline;
+    margin: 0.3em;
+    width: fit-content;
+    border: none;
+}
+
+#quote_form_productID_input {
+    width: 2em;
+    background-color: transparent;
+    color: transparent;
+    border: none;
+}
+
+#quote_form_productID_input:focus {
+    outline: none;
+}
+
+#quote_form_label {
+    display: inline;
+    margin: 0.2em;
+    width: 3em;
+    font-size: 1.3em;
+}
+
+#quote_form_productPrice_input {
+    width: 2em;
+    font-size: 1em;
+    border: none;
+    background-color: transparent;
+}
+
+#quote_form_productPrice_input:focus {
+    outline: none;
+}
+
+#quote_form_unit {
+    display: inline;
+    margin: 0.2em;
+    font-size: 1em;
+}
+
+#quote_form_text {
+    margin: 0.2em;
+}
+
+#quote_form_quality_input {
+    width: 4em;
+}
+
+/*Cart and Order*/
+#item {
+    width: 100%;
+    margin: auto;
+    margin-top: 5px;
+}
+
+#infor {
+    width: 90%;
+    text-align: center;
+    border: none;
+    background-color: #dddddd;
+}
+
+#item_id {
+    width: 10%;
+
+}
+
+#name {
+    width: 30%;
+}
+
+#price {
+    width: 10%;
+}
+
+#quantity {
+    width: 15%;
+}
+
+#quantity_input {
+    width: 35%;
+    margin-right: 0.5em;
+}
+
+#total {
+    width: 10%;
+}
+
+#order_total {
+    margin: auto;
+    text-align: right;
+    width: 90%;
+
+}
+
+table {
+    border-collapse: collapse;
+    width: 90%;
+    margin: auto;
+}
+
+th,
+td {
+    border: 1px solid black;
+    text-align: center;
+}
+
+th {
+    background-color: #dddddd;
+}
+
+/*Orders*/
+#order_id {
+    width: 10%;
+
+}
+
+#date {
+    width: 10%;
+}
+
+#add {
+    width: 45%;
+}
+
+/*profile*/
+#profile_input_field {
+    width: 50%;
+    margin: 15px;
+}
+
+#profile_form {
+    margin: auto;
+}
