@@ -1,8 +1,7 @@
 <?php
 session_start();
-/**connect to database*/
-require 'connect.php';
 include 'config/template.php';
+include 'functions.php';
 error_reporting(0);
 /**set time zone for clock */
 date_default_timezone_set('America/Chicago');
@@ -20,17 +19,7 @@ date_default_timezone_set('America/Chicago');
     </header>
     <!--Menu Bar-->
     <aside>
-        <div style="text-align:center; padding: 5px;"><label for="name">
-                <h3><b>Welcome:</b>
-            </label><?php echo $_SESSION['cus_name'] ?></h3>
-        </div>
-        <div class=" vertical-menu">
-            <a href="dashboard.php" class="active">Home</a>
-            <a href="cart.php">Cart (<?php echo $_SESSION['numberOfOrder'] ?>)</a>
-            <a href="orders.php">Orders</a>
-            <a href="profile.php">Profile</a>
-            <a onclick="showConfirm()">Log Out</a>
-        </div>
+        <?php menu('dash_board') ?>
     </aside>
     <!--Quotes-->
     <section>
@@ -44,7 +33,7 @@ date_default_timezone_set('America/Chicago');
             $_SESSION['mess'] = '';
             ?>
         </div>
-        <?php include 'dashboard_get_quotes.php' ?>
+        <?php dash_quote() ?>
         <div><a id="button_link" style="display: block; margin: auto;" href="cart.php">Go To Cart</a></div>
     </section>
 </body>

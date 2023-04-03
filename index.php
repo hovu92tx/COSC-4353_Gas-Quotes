@@ -1,9 +1,10 @@
 <?php
+error_reporting(0);
 session_start();
-require 'connect.php';
+require 'functions.php';
 include 'config/template.php';
 include 'config/sessions.php';
-error_reporting(0);
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -23,7 +24,7 @@ error_reporting(0);
     <section>
         <h2 style="background-color: rgb(91, 253, 91); margin: 0em; padding: 0.5em; text-align: center;">Quotes</h2>
         <!--Get quote from database and list them on the screen-->
-        <?php include 'index_get_quotes.php'; ?>
+        <?php index_Quote() ?>
     </section>
 </body>
 <footer>

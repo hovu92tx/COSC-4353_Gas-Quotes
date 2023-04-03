@@ -19,17 +19,7 @@ if (isset($_POST['place_order_button'])) {
         ABC Company
     </header>
     <aside>
-        <div style="text-align:center; padding: 5px;"><label for=" name">
-                <h3><b>Welcome:</b>
-            </label><?php echo $_SESSION['cus_name'] ?></h3>
-        </div>
-        <div class="vertical-menu">
-            <a href="dashboard.php">Home</a>
-            <a href="Cart.php" class="active">Cart (<?php echo $_SESSION['numberOfOrder'] ?>)</a>
-            <a href="orders.php">Orders</a>
-            <a href="profile.php">Profile</a>
-            <a onclick="showConfirm()">Log Out</a>
-        </div>
+        <?php menu('cart'); ?>
     </aside>
     <section>
         <h2 style="text-align: center;">Order Review</h2>
@@ -69,7 +59,7 @@ if (isset($_POST['place_order_button'])) {
                             $product_name = $result2['product_name'];
                             $product_price = $result2['product_price'];
                             $total = $product_price * $quantity;
-                            $html = '<form id="item" action="cart_function.php" method="POST">
+                            $html = '<form id="item" action="functions.php" method="POST">
                                 <table>
                                     <tr>
                                         <th id="item_id"><input id="infor" name="product_id" type="text" value="' . $product_id . ' "readonly="readonly"></input></th>
@@ -92,7 +82,7 @@ if (isset($_POST['place_order_button'])) {
         ?>
         <div style="width:90%; margin: auto;">
             <a id="button_link" href="cart.php">Modify Order</a>
-            <a id="button_link" href="place_order.php">Place Order</a>
+            <a id="button_link" href="functions.php?placeOrder=true">Place Order</a>
         </div>
     </section>
 </body>

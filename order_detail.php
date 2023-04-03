@@ -32,17 +32,7 @@ try {
         ABC Company
     </header>
     <aside>
-        <div style="text-align:center; padding: 5px;"><label for=" name">
-                <h3><b>Welcome:</b>
-            </label><?php echo $name ?></h3>
-        </div>
-        <div class="vertical-menu">
-            <a href="dashboard.php">Home</a>
-            <a href="Cart.php">Cart (<?php echo $_SESSION['numberOfOrder'] ?>)</a>
-            <a href="orders.php" class="active">Orders</a>
-            <a href="profile.php">Profile</a>
-            <a href="logout_action.php">Log Out</a>
-        </div>
+        <?php menu('order') ?>
     </aside>
     <section>
         <h2 style="text-align: center;">Order Detail</h2>
@@ -99,11 +89,11 @@ try {
             echo 'Connection fail!';
         }
         echo '<div id="order_total"><h2>Order Total: $' . number_format($order_total, 2) . ' </h2></div>';
+        echo '<div>
+                <a id="button_link" href="orders.php">Back</a>
+                <a id="button_link" href="dashboard.php">Exit</a>
+                </div>';
         ?>
-        <div>
-            <a id="button_link" href="orders.php">Back</a>
-            <a id="button_link" href="dashboard.php">Exit</a>
-        </div>
     </section>
 </body>
 <footer>
