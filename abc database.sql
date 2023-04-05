@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 24, 2023 at 05:10 PM
+-- Generation Time: Apr 05, 2023 at 07:27 AM
 -- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.4
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -35,14 +35,6 @@ CREATE TABLE `orders` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `orders`
---
-
-INSERT INTO `orders` (`order_id`, `user_id`, `order_total`, `order_date`) VALUES
-(28, 1007, 15.75, '2023-03-24 06:57:50'),
-(29, 1007, 54.55, '2023-03-24 06:58:49');
-
---
 -- Triggers `orders`
 --
 DELIMITER $$
@@ -66,17 +58,6 @@ CREATE TABLE `order_detail` (
   `order_detail_delivery_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `order_detail`
---
-
-INSERT INTO `order_detail` (`order_detail_id`, `order_id`, `product_id`, `order_detail_unit_price`, `order_detail_quantity`, `order_detail_total`, `order_detail_delivery_date`) VALUES
-(17, 28, 87, 3.05, 3, 9.15, '2023-03-25'),
-(18, 28, 89, 3.3, 2, 6.6, '2023-03-25'),
-(19, 29, 87, 3.05, 3, 9.15, '2023-03-25'),
-(20, 29, 89, 3.3, 3, 9.9, '2023-03-25'),
-(21, 29, 93, 3.55, 10, 35.5, '2023-03-25');
-
 -- --------------------------------------------------------
 
 --
@@ -89,15 +70,6 @@ CREATE TABLE `products` (
   `product_price` double NOT NULL,
   `image_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `products`
---
-
-INSERT INTO `products` (`product_id`, `product_name`, `product_price`, `image_id`) VALUES
-(87, 'Unleaded 87', 3.05, 1087),
-(89, 'Unleaded 89', 3.3, 1089),
-(93, 'Unleaded 93', 3.55, 1093);
 
 -- --------------------------------------------------------
 
@@ -112,17 +84,12 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`userid`, `username`, `password`) VALUES
-(1003, 'group', '12345678'),
-(1007, 'hovu92tx', 'nhithieugia'),
-(1008, 'hovu92dk', 'nhithieugia');
-
---
 -- Triggers `users`
 --
+DELIMITER $$
+CREATE TRIGGER `delete orders` BEFORE DELETE ON `users` FOR EACH ROW DELETE FROM orders WHERE user_id=OLD.userid
+$$
+DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `delete user` BEFORE DELETE ON `users` FOR EACH ROW DELETE FROM user_profiles WHERE userid=OLD.userid
 $$
@@ -143,15 +110,6 @@ CREATE TABLE `user_profiles` (
   `state` text DEFAULT '0',
   `zipcode` int(5) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `user_profiles`
---
-
-INSERT INTO `user_profiles` (`userid`, `name`, `address1`, `address2`, `city`, `state`, `zipcode`) VALUES
-(1003, '0', '0', '0', '0', '0', 0),
-(1007, 'VU HO', '16419 Lasting Light Lane', '0', 'Houston', 'TX', 77095),
-(1008, '0', '0', '0', '0', '0', 0);
 
 --
 -- Indexes for dumped tables
@@ -199,19 +157,19 @@ ALTER TABLE `user_profiles`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `order_detail`
 --
 ALTER TABLE `order_detail`
-  MODIFY `order_detail_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `order_detail_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1009;
+  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
