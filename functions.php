@@ -9,67 +9,77 @@ if (isset($_POST["loginButton"])) {
     if (!empty($_POST['username']) && !empty($_POST['password'])) {
         $uname = $_POST['username'];
         $pass = $_POST['password'];
-        /**Check whether the username exist in the database or not*/
-        $sql = "SELECT * FROM users WHERE username LIKE '$uname'";
-        $statement = $conn->query($sql);
-        $results = $statement->fetchAll(PDO::FETCH_ASSOC);
-        if ($results) {
-            foreach ($results as $result) {
-                $username = $result['username'];
-                /** If the usename exist in the database, check password*/
-                $sql2 = "SELECT * FROM users WHERE username LIKE '$username' and password LIKE '$pass'";
-                $statement = $conn->query($sql2);
-                $results2 = $statement->fetchAll(PDO::FETCH_ASSOC);
-                if ($results2) {
-                    foreach ($results2 as $result2) {
-                        $user_id = $result2['userid'];
-                        /**Check user's information after check username and password */
-                        $sql3 = "SELECT * FROM user_profiles WHERE userid LIKE '$user_id'";
-                        $statement = $conn->query($sql3);
-                        $results3 = $statement->fetchAll(PDO::FETCH_ASSOC);
-                        if ($results3) {
-                            foreach ($results3 as $result3) {
-                                if ($result3['name'] === '0' | $result3['address1'] === '0' | $result3['city'] === '0' | $result3['state'] === '0' | $result3['zipcode'] === '0') {
-                                    $_SESSION['username'] = $result['username'];
-                                    $_SESSION['userid'] = $result2['userid'];
-                                    /**Ask customer to provide customer's information for the first time login */
-                                    header('location: profile_filling_page.php');
-                                } else {
-                                    $_SESSION['username'] = $result['username'];
-                                    $_SESSION['userid'] = $result2['userid'];
-                                    $_SESSION['cus_name'] = $result3['name'];
-                                    $_SESSION['cus_add1'] = $result3['address1'];
-                                    $_SESSION['cus_add2'] = $result3['address2'];
-                                    $_SESSION['cus_city'] = $result3['city'];
-                                    $_SESSION['cus_state'] = $result3['state'];
-                                    $_SESSION['cus_zipcode'] = $result3['zipcode'];
-                                    /**Go to customer dashboard for old customer */
-                                    header('location: dashboard.php');
+        if (pass_Check($pass) && userName_Check($uname)) {
+            $encrypted_UserName = encrypt_Data($uname);
+            $encrypted_Password = encrypt_Data($pass);
+            /**Check whether the username exist in the database or not*/
+            $sql = "SELECT * FROM users WHERE username LIKE '$encrypted_UserName'";
+            $statement = $conn->query($sql);
+            $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+            if ($results) {
+                foreach ($results as $result) {
+                    $username = $result['username'];
+                    /** If the usename exist in the database, check password*/
+                    $sql2 = "SELECT * FROM users WHERE username LIKE '$encrypted_UserName' and password LIKE '$encrypted_Password'";
+                    $statement = $conn->query($sql2);
+                    $results2 = $statement->fetchAll(PDO::FETCH_ASSOC);
+                    if ($results2) {
+                        foreach ($results2 as $result2) {
+                            $user_id = $result2['userid'];
+                            /**Check user's information after check username and password */
+                            $sql3 = "SELECT * FROM user_profiles WHERE userid LIKE '$user_id'";
+                            $statement = $conn->query($sql3);
+                            $results3 = $statement->fetchAll(PDO::FETCH_ASSOC);
+                            if ($results3) {
+                                foreach ($results3 as $result3) {
+                                    if ($result3['name'] === '0' | $result3['address1'] === '0' | $result3['city'] === '0' | $result3['state'] === '0' | $result3['zipcode'] === '0') {
+                                        $_SESSION['username'] = $result['username'];
+                                        $_SESSION['userid'] = $result2['userid'];
+                                        /**Ask customer to provide customer's information for the first time login */
+                                        header('location: profile_filling_page.php');
+                                    } else {
+                                        $_SESSION['username'] = $result['username'];
+                                        $_SESSION['userid'] = $result2['userid'];
+                                        $_SESSION['cus_name'] = $result3['name'];
+                                        $_SESSION['cus_add1'] = $result3['address1'];
+                                        $_SESSION['cus_add2'] = $result3['address2'];
+                                        $_SESSION['cus_city'] = $result3['city'];
+                                        $_SESSION['cus_state'] = $result3['state'];
+                                        $_SESSION['cus_zipcode'] = $result3['zipcode'];
+                                        /**Go to customer dashboard for old customer */
+                                        header('location: dashboard.php');
+                                    }
                                 }
                             }
                         }
+                    } else {
+                        /**Pop-up message if password is incorrect */
+                        echo ("<script LANGUAGE='JavaScript'>alert('Login Fail! Please Login again');window.location.href='http://localhost/COSC-4353_Group-Project-/index.php';</script>");
                     }
-                } else {
-                    /**Pop-up message if password is incorrect */
-                    echo ("<script LANGUAGE='JavaScript'>alert('Login Fail! Please Login again');window.location.href='http://localhost/COSC-4353_Group-Project-/index.php';</script>");
+                }
+            } else {
+                /**Create new username, password, and null profile if customer does not exist in the database then ask customer for customer's information */
+                $sql4 = "INSERT INTO `users` (`userid`, `username`, `password`) VALUES (NULL, '$encrypted_UserName', '$encrypted_Password')";
+                $conn->query($sql4);
+                $sql5 = "SELECT * FROM users WHERE username LIKE '$encrypted_UserName'";
+                $statement = $conn->query($sql5);
+                $results5 = $statement->fetchAll(PDO::FETCH_ASSOC);
+                if ($results5) {
+                    foreach ($results5 as $result5) {
+                        $user_id = $result5['userid'];
+                        $sql6 = "INSERT INTO `user_profiles` (`userid`, `name`, `address1`, `address2`, `city`, `state`, `zipcode`) VALUES ('$user_id', '0', '0', '0', '0', '0', '0')";
+                        $conn->query($sql6);
+                        $_SESSION['username'] = $encrypted_UserName;
+                        $_SESSION['userid'] = $user_id;
+                        header('location: profile_filling_page.php');
+                    }
                 }
             }
         } else {
-            /**Create new username, password, and null profile if customer does not exist in the database then ask customer for customer's information */
-            $sql4 = "INSERT INTO `users` (`userid`, `username`, `password`) VALUES (NULL, '$uname', '$pass')";
-            $conn->query($sql4);
-            $sql5 = "SELECT * FROM users WHERE username LIKE '$uname'";
-            $statement = $conn->query($sql5);
-            $results5 = $statement->fetchAll(PDO::FETCH_ASSOC);
-            if ($results5) {
-                foreach ($results5 as $result5) {
-                    $user_id = $result5['userid'];
-                    $sql6 = "INSERT INTO `user_profiles` (`userid`, `name`, `address1`, `address2`, `city`, `state`, `zipcode`) VALUES ('$user_id', '0', '0', '0', '0', '0', '0')";
-                    $conn->query($sql6);
-                    $_SESSION['username'] = $uname;
-                    $_SESSION['userid'] = $user_id;
-                    header('location: profile_filling_page.php');
-                }
+            if (!pass_Check($pass)) {
+                echo ("<script LANGUAGE='JavaScript'>alert('Password should be at least 8 characters in length and should include at least one upper case letter, one number, and one special character.');window.location.href='http://localhost/COSC-4353_Group-Project-/index.php';</script>");
+            } elseif (!userName_Check($uname)) {
+                echo ("<script LANGUAGE='JavaScript'>alert('Username should be at least 4 characters in length and should not include any special character.');window.location.href='http://localhost/COSC-4353_Group-Project-/index.php';</script>");
             }
         }
     }
@@ -120,6 +130,159 @@ if (isset($_POST["pf_submit_button"])) {
 if (isset($_POST["pf_save_button"])) {
     filling('profile');
 }
+
+/**-----------------------------------------------------------------------
+ * LOGIN FUNCTIONS
+ * -----------------------------------------------------------------------
+ */
+
+/**Password Check */
+function pass_Check($password)
+{
+    $uppercase = preg_match('@[A-Z]@', $password);
+    $lowercase = preg_match('@[a-z]@', $password);
+    $number    = preg_match('@[0-9]@', $password);
+    $specialChars = preg_match('@[^\w]@', $password);
+
+    if (!$uppercase || !$lowercase || !$number || !$specialChars || strlen($password) < 8) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+/**Username check */
+function userName_Check($userName)
+{
+    $specialChars = preg_match('@[^\w]@', $userName);
+    if (strlen($userName) <= 4 || $specialChars) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+/**Encrypt data*/
+function encrypt_Data($string)
+{
+    $ciphering = "AES-128-CTR";
+
+    // Use OpenSSl Encryption method
+    $iv_length = openssl_cipher_iv_length($ciphering);
+    $options = 0;
+
+    // Non-NULL Initialization Vector for encryption
+    $encryption_iv = '1234567891011121';
+
+    // Store the encryption key
+    $encryption_key = "COSC4353";
+
+    // Use openssl_encrypt() function to encrypt the data
+    $encryption = openssl_encrypt(
+        $string,
+        $ciphering,
+        $encryption_key,
+        $options,
+        $encryption_iv
+    );
+
+    // Display the encrypted string
+    return $encryption;
+}
+
+/**Deencrypt Data */
+function deencrypt_Data($encryption)
+{
+    $ciphering = "AES-128-CTR";
+
+    // Use OpenSSl Encryption method
+    $iv_length = openssl_cipher_iv_length($ciphering);
+    $options = 0;
+
+    // Non-NULL Initialization Vector for encryption
+    $encryption_iv = '1234567891011121';
+
+    // Store the encryption key
+    $encryption_key = "COSC4353";
+    // Non-NULL Initialization Vector for decryption
+    $decryption_iv = '1234567891011121';
+
+    // Store the decryption key
+    $decryption_key = "GeeksforGeeks";
+
+    // Use openssl_decrypt() function to decrypt the data
+    $decryption = openssl_decrypt(
+        $encryption,
+        $ciphering,
+        $decryption_key,
+        $options,
+        $decryption_iv
+    );
+
+    // Display the decrypted string
+    return $decryption;
+}
+
+/**Profile Filling */
+
+function filling($page)
+{
+    require 'connect.php';
+    if ($page == 'filling') {
+        if (!empty($_POST['name'] && $_POST['address1'] && $_POST['city'] && $_POST['state'] && $_POST['zipcode'])) {
+            $user_id = $_SESSION['userid'];
+            $name = $_POST['name'];
+            $address1 = $_POST['address1'];
+            if ($_POST['address2'] === '') {
+                $address2 = 'N/A';
+            } else {
+                $address2 = $_POST['address2'];
+            }
+            $city = $_POST['city'];
+            $state = $_POST['state'];
+            $zipcode = $_POST['zipcode'];
+            $_SESSION['cus_name'] = $name;
+            $_SESSION['cus_add1'] = $address1;
+            $_SESSION['cus_add2'] = $address2;
+            $_SESSION['cus_city'] = $city;
+            $_SESSION['cus_state'] = $state;
+            $_SESSION['cus_zipcode'] = $zipcode;
+            $sql = "UPDATE `user_profiles` SET name= '$name', address1='$address1', address2= '$address2', city= '$city',state= '$state', zipcode= '$zipcode' WHERE userid ='$user_id'";
+            $conn->query($sql);
+        }
+        header('location: dashboard.php');
+    } elseif ($page == 'profile') {
+        if (!empty($_POST['name'] && $_POST['address1'] && $_POST['city'] && $_POST['state'] && $_POST['zipcode'])) {
+            $user_id = $_SESSION['userid'];
+            $name = $_POST['name'];
+            $address1 = $_POST['address1'];
+            if ($_POST['address2'] === '') {
+                $address2 = 'N/A';
+            } else {
+                $address2 = $_POST['address2'];
+            }
+            $city = $_POST['city'];
+            $state = $_POST['state'];
+            $zipcode = $_POST['zipcode'];
+            $_SESSION['cus_name'] = $name;
+            $_SESSION['cus_add1'] = $address1;
+            $_SESSION['cus_add2'] = $address2;
+            $_SESSION['cus_city'] = $city;
+            $_SESSION['cus_state'] = $state;
+            $_SESSION['cus_zipcode'] = $zipcode;
+            $sql = "UPDATE `user_profiles` SET name= '$name', address1='$address1', address2= '$address2', city= '$city',state= '$state', zipcode= '$zipcode' WHERE userid ='$user_id'";
+            $conn->query($sql);
+        }
+        header('location: profile.php');
+    }
+}
+
+/**-----------------------------------------------------------------------
+ * CART'S FUNCTIONS 
+ * -----------------------------------------------------------------------
+ */
+
+
 
 /**add item to cart function */
 function add_item($p_id, $p_quantity)
@@ -242,8 +405,13 @@ function load_Cart()
     }
 }
 
+/**-----------------------------------------------------------------------
+ * ORDER'S FUNCTIONS
+ * -----------------------------------------------------------------------
+ */
 
-/**ORDER'S FUNCTIONS */
+
+
 /**Order History */
 function orders()
 {
@@ -322,13 +490,23 @@ function placeOrder()
     $_SESSION['numberOfOrder'] = 0;
 }
 
-
-/**---- GENERAL FUNCTION ----*/
+/**-----------------------------------------------------------------------
+ * QUOTE"S FUNCTIONS
+ * -----------------------------------------------------------------------
+ */
 
 /**get quote for dashboard */
 function dash_quote()
 {
     require 'connect.php';
+
+    echo '<h2 style="background-color: rgb(91, 253, 91); margin: 0em; padding: 0.5em; text-align: center;">Prices of gas in' . $_SESSION['cus_city'] . '</h2>
+        <div style=" text-align: center; margin: 10px;">
+        <span id="ct7"></span>
+        </div>
+        <div style="margin: auto; width: 98%;  background-color: lightgreen; text-align: center;">' . $_SESSION['mess'] .
+        $_SESSION['mess'] = "" .
+        '</div>';
     try {
         $sql = "SELECT * FROM products";
         $statement = $conn->query($sql);
@@ -346,7 +524,7 @@ function dash_quote()
                         <input id="quote_form_productPrice_input" name="product_price" type="text" readonly value="' . $product_price . '">
                         <p id="quote_form_unit">$/gallon</p><br>
                         <p id="quote_form_text">(Tax is included.)</p>
-                        <input id="quote_form_quality_input" name="product_quantity" type="number" min="1" value="1">
+                        <input id="quote_form_quality_input" name="product_quantity" type="number" min="1" value="1" required>
                         <button id="form_button" name="add_to_cart">Add to Cart</button>
                     </form>
                 </div>';
@@ -361,6 +539,7 @@ function dash_quote()
 /**Get quotes for index page*/
 function index_Quote()
 {
+    echo '<h2 style="background-color: rgb(91, 253, 91); margin: 0em; padding: 0.5em; text-align: center;">Quotes</h2>';
     require 'connect.php';
     try {
         $sql = "SELECT * FROM products";
@@ -387,56 +566,9 @@ function index_Quote()
     }
 }
 
-/**Profile Filling */
 
-function filling($page)
+/**Price Calculation */
+function price_Calculatior()
 {
-    require 'connect.php';
-    if ($page == 'filling') {
-        if (!empty($_POST['name'] && $_POST['address1'] && $_POST['city'] && $_POST['state'] && $_POST['zipcode'])) {
-            $user_id = $_SESSION['userid'];
-            $name = $_POST['name'];
-            $address1 = $_POST['address1'];
-            if ($_POST['address2'] === '') {
-                $address2 = 'N/A';
-            } else {
-                $address2 = $_POST['address2'];
-            }
-            $city = $_POST['city'];
-            $state = $_POST['state'];
-            $zipcode = $_POST['zipcode'];
-            $_SESSION['cus_name'] = $name;
-            $_SESSION['cus_add1'] = $address1;
-            $_SESSION['cus_add2'] = $address2;
-            $_SESSION['cus_city'] = $city;
-            $_SESSION['cus_state'] = $state;
-            $_SESSION['cus_zipcode'] = $zipcode;
-            $sql = "UPDATE `user_profiles` SET name= '$name', address1='$address1', address2= '$address2', city= '$city',state= '$state', zipcode= '$zipcode' WHERE userid ='$user_id'";
-            $conn->query($sql);
-        }
-        header('location: dashboard.php');
-    } elseif ($page == 'profile') {
-        if (!empty($_POST['name'] && $_POST['address1'] && $_POST['city'] && $_POST['state'] && $_POST['zipcode'])) {
-            $user_id = $_SESSION['userid'];
-            $name = $_POST['name'];
-            $address1 = $_POST['address1'];
-            if ($_POST['address2'] === '') {
-                $address2 = 'N/A';
-            } else {
-                $address2 = $_POST['address2'];
-            }
-            $city = $_POST['city'];
-            $state = $_POST['state'];
-            $zipcode = $_POST['zipcode'];
-            $_SESSION['cus_name'] = $name;
-            $_SESSION['cus_add1'] = $address1;
-            $_SESSION['cus_add2'] = $address2;
-            $_SESSION['cus_city'] = $city;
-            $_SESSION['cus_state'] = $state;
-            $_SESSION['cus_zipcode'] = $zipcode;
-            $sql = "UPDATE `user_profiles` SET name= '$name', address1='$address1', address2= '$address2', city= '$city',state= '$state', zipcode= '$zipcode' WHERE userid ='$user_id'";
-            $conn->query($sql);
-        }
-        header('location: profile.php');
-    }
+     
 }

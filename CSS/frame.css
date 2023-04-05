@@ -18,8 +18,9 @@ section {
     float: left;
     padding: 0.5em;
     width: 72%;
+    min-height: 40em;
     text-align: center;
-    border: solid aqua 0.2em;
+    border: solid aqua 0.05em;
 
 }
 
