@@ -369,10 +369,10 @@ function load_Cart()
                         foreach ($results as $result) {
                             $product_name = $result['product_name'];
                             $product_price = $result['product_price'];
+                            $product_price = price_Calculator($product_price, $quantity);
                             $total = $quantity * $product_price;
                             $order_total += $total;
                             $html = '
-                                
                             <div id="list">
                                 <form id="item" action="functions.php" method="POST">
                                     <table>
@@ -477,6 +477,7 @@ function placeOrder()
                 foreach ($results2 as $result2) {
                     $product_name = $result2['product_name'];
                     $product_price = $result2['product_price'];
+                    $product_price = price_Calculator($product_price, $quantity);
                     $total = $quantity * $product_price;
                 }
             }
@@ -521,7 +522,7 @@ function dash_quote()
                         <h3 id="quote_form_h3">' . $product_name . '</h3>
                         <input id="quote_form_productID_input" name="product_id" type="text" readonly value="' . $product_id . '"><br>
                         <label id="quote_form_label" for="product_price">Price:</label>
-                        <input id="quote_form_productPrice_input" name="product_price" type="text" readonly value="' . $product_price . '">
+                        <input id="quote_form_productPrice_input" name="product_price" type="text" readonly value="' . number_format(price_Calculator($product_price, 100), 2) . '">
                         <p id="quote_form_unit">$/gallon</p><br>
                         <p id="quote_form_text">(Tax is included.)</p>
                         <input id="quote_form_quality_input" name="product_quantity" type="number" min="1" value="1" required>
@@ -548,7 +549,7 @@ function index_Quote()
         if ($results) {
             foreach ($results as $result) {
                 $product_name = $result['product_name'];
-                $product_price = $result['product_price'];
+                $product_price = price_Calculator($result['product_price'], 100);
                 $product_id = $result['product_id'];
                 $html = '<div id="quote_form_container"><form id="quote_form" action="" method="POST">
                     <h3 id="quote_form_h3">' . $product_name . '</h3>
@@ -568,7 +569,42 @@ function index_Quote()
 
 
 /**Price Calculation */
-function price_Calculatior()
+function location_Factor()
 {
-     
+    if ($_SESSION['cus_state'] == 'Texas') {
+        $location_Factor = 2;
+        return $location_Factor;
+    } else {
+        $location_Factor = 4;
+        return $location_Factor;
+    }
+}
+function his_Factor()
+{
+    require 'connect.php';
+    $userid = $_SESSION['userid'];
+    $sql = "SELECT * FROM orders WHERE user_id LIKE $userid";
+    $statement = $conn->query($sql);
+    $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+    if (empty($results)) {
+        $his_factor = 0;
+        return $his_factor;
+    } else {
+        $his_factor = 1;
+        return $his_factor;
+    }
+}
+function price_Calculator($current_Price, $quantity)
+{
+    $location_Factor = location_Factor();
+    $his_rate = his_Factor();
+    if ($quantity > 1000) {
+        $margin = $current_Price + $current_Price * (($location_Factor - $his_rate + 2 + 10) / 100);
+    } else {
+        $margin = $current_Price + $current_Price * (($location_Factor - $his_rate + 3 + 10) / 100);
+    }
+
+    $suggested_Price = $current_Price + $margin;
+
+    return $suggested_Price;
 }

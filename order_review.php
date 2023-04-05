@@ -2,6 +2,7 @@
 session_start();
 require 'connect.php';
 include 'config/template.php';
+include 'functions.php';
 error_reporting(0);
 if (isset($_POST['place_order_button'])) {
     $_SESSION['delivery_date'] = $_POST['date'];
@@ -58,6 +59,7 @@ if (isset($_POST['place_order_button'])) {
                         foreach ($results2 as $result2) {
                             $product_name = $result2['product_name'];
                             $product_price = $result2['product_price'];
+                            $product_price = price_Calculator($product_price, $quantity);
                             $total = $product_price * $quantity;
                             $html = '<form id="item" action="functions.php" method="POST">
                                 <table>
