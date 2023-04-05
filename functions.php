@@ -516,13 +516,14 @@ function dash_quote()
             foreach ($results as $result) {
                 $product_name = $result['product_name'];
                 $product_price = $result['product_price'];
+                $product_price = price_Calculator($product_price, 100);
                 $product_id = $result['product_id'];
                 $html = '<div id="quote_form_container">
                     <form id="quote_form" action="functions.php" method="POST">
                         <h3 id="quote_form_h3">' . $product_name . '</h3>
                         <input id="quote_form_productID_input" name="product_id" type="text" readonly value="' . $product_id . '"><br>
                         <label id="quote_form_label" for="product_price">Price:</label>
-                        <input id="quote_form_productPrice_input" name="product_price" type="text" readonly value="' . number_format(price_Calculator($product_price, 100), 2) . '">
+                        <input id="quote_form_productPrice_input" name="product_price" type="text" readonly value="' . number_format($product_price, 2) . '">
                         <p id="quote_form_unit">$/gallon</p><br>
                         <p id="quote_form_text">(Tax is included.)</p>
                         <input id="quote_form_quality_input" name="product_quantity" type="number" min="1" value="1" required>
@@ -599,9 +600,9 @@ function price_Calculator($current_Price, $quantity)
     $location_Factor = location_Factor();
     $his_rate = his_Factor();
     if ($quantity > 1000) {
-        $margin = $current_Price + $current_Price * (($location_Factor - $his_rate + 2 + 10) / 100);
+        $margin = $current_Price * ($location_Factor - $his_rate + 2 + 10) / 100;
     } else {
-        $margin = $current_Price + $current_Price * (($location_Factor - $his_rate + 3 + 10) / 100);
+        $margin = $current_Price * ($location_Factor - $his_rate + 3 + 10) / 100;
     }
 
     $suggested_Price = $current_Price + $margin;
