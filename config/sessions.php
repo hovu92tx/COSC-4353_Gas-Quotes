@@ -10,7 +10,7 @@ $_SESSION['cus_name'] = "Customer Name #";
 $_SESSION['cus_add1'] = 'Address #1';
 $_SESSION['cus_add2'] = 'Address #2';
 $_SESSION['cus_city'] = 'Houston';
-$_SESSION['cus_state'] = 'Choose a State';
+$_SESSION['cus_state'] = 'State';
 $_SESSION['cus_zipcode'] = 'Zipcode';
 
 /**cart information */

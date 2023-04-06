@@ -29,7 +29,9 @@ function menu($activePage)
         $html = '<div style="text-align:center; padding: 5px;"><label for="name">
                     <h3><b>Welcome:</b>
                     </label>' . $_SESSION['cus_name'] . '</h3>
+                    <span id="ct7"></span>
                 </div>
+                
                 <div class=" vertical-menu">
                     <a href="dashboard.php" class="active">Home</a>
                     <a href="cart.php">Cart (' . $_SESSION['numberOfOrder'] . ')</a>
@@ -41,7 +43,9 @@ function menu($activePage)
         $html = '<div style="text-align:center; padding: 5px;"><label for="name">
                     <h3><b>Welcome:</b>
                     </label>' . $_SESSION['cus_name'] . '</h3>
+                    <span id="ct7"></span>
                 </div>
+                
                 <div class=" vertical-menu">
                     <a href="dashboard.php">Home</a>
                     <a href="cart.php" class="active">Cart (' . $_SESSION['numberOfOrder'] . ')</a>
@@ -53,7 +57,9 @@ function menu($activePage)
         $html = '<div style="text-align:center; padding: 5px;"><label for="name">
                     <h3><b>Welcome:</b>
                     </label>' . $_SESSION['cus_name'] . '</h3>
+                    <span id="ct7"></span>
                 </div>
+                
                 <div class=" vertical-menu">
                     <a href="dashboard.php">Home</a>
                     <a href="cart.php" >Cart (' . $_SESSION['numberOfOrder'] . ')</a>
@@ -65,7 +71,9 @@ function menu($activePage)
         $html = '<div style="text-align:center; padding: 5px;"><label for="name">
                     <h3><b>Welcome:</b>
                     </label>' . $_SESSION['cus_name'] . '</h3>
+                    <span id="ct7"></span>
                 </div>
+                
                 <div class=" vertical-menu">
                     <a href="dashboard.php">Home</a>
                     <a href="cart.php">Cart (' . $_SESSION['numberOfOrder'] . ')</a>

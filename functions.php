@@ -496,87 +496,14 @@ function placeOrder()
  * -----------------------------------------------------------------------
  */
 
-/**get quote for dashboard */
-function dash_quote()
-{
-    require 'connect.php';
-
-    echo '<h2 style="background-color: rgb(91, 253, 91); margin: 0em; padding: 0.5em; text-align: center;">Prices of gas in' . $_SESSION['cus_city'] . '</h2>
-        <div style=" text-align: center; margin: 10px;">
-        <span id="ct7"></span>
-        </div>
-        <div style="margin: auto; width: 98%;  background-color: lightgreen; text-align: center;">' . $_SESSION['mess'] .
-        $_SESSION['mess'] = "" .
-        '</div>';
-    try {
-        $sql = "SELECT * FROM products";
-        $statement = $conn->query($sql);
-        $results = $statement->fetchAll(PDO::FETCH_ASSOC);
-        if ($results) {
-            foreach ($results as $result) {
-                $product_name = $result['product_name'];
-                $product_price = $result['product_price'];
-                $product_price = price_Calculator($product_price, 100);
-                $product_id = $result['product_id'];
-                $html = '<div id="quote_form_container">
-                    <form id="quote_form" action="functions.php" method="POST">
-                        <h3 id="quote_form_h3">' . $product_name . '</h3>
-                        <input id="quote_form_productID_input" name="product_id" type="text" readonly value="' . $product_id . '"><br>
-                        <label id="quote_form_label" for="product_price">Price:</label>
-                        <input id="quote_form_productPrice_input" name="product_price" type="text" readonly value="' . number_format($product_price, 2) . '">
-                        <p id="quote_form_unit">$/gallon</p><br>
-                        <p id="quote_form_text">(Tax is included.)</p>
-                        <input id="quote_form_quality_input" name="product_quantity" type="number" min="1" value="1" required>
-                        <button id="form_button" name="add_to_cart">Add to Cart</button>
-                    </form>
-                </div>';
-                echo $html;
-            }
-        }
-    } catch (PDOException $error) {
-        echo 'Connection fail!';
-    }
-}
-
-/**Get quotes for index page*/
-function index_Quote()
-{
-    echo '<h2 style="background-color: rgb(91, 253, 91); margin: 0em; padding: 0.5em; text-align: center;">Quotes</h2>';
-    require 'connect.php';
-    try {
-        $sql = "SELECT * FROM products";
-        $statement = $conn->query($sql);
-        $results = $statement->fetchAll(PDO::FETCH_ASSOC);
-        if ($results) {
-            foreach ($results as $result) {
-                $product_name = $result['product_name'];
-                $product_price = price_Calculator($result['product_price'], 100);
-                $product_id = $result['product_id'];
-                $html = '<div id="quote_form_container"><form id="quote_form" action="" method="POST">
-                    <h3 id="quote_form_h3">' . $product_name . '</h3>
-                    <input id="quote_form_productID_input" type="text" readonly value="' . $product_id . '"><br>
-                    <label id="quote_form_label" for="product_price">Price:</label>
-                    <input id="quote_form_productPrice_input" type="text" readonly value="' . number_format($product_price, 2) . '">
-                    <p id="quote_form_unit">$/gallon</p><br>
-                    <p id="quote_form_text">(Tax is included.)</p>
-                </form></div>';
-                echo $html;
-            }
-        }
-    } catch (PDOException $error) {
-        echo "Server Error";
-    }
-}
-
-
 /**Price Calculation */
 function location_Factor()
 {
-    if ($_SESSION['cus_state'] == 'Texas') {
-        $location_Factor = 2;
+    if ($_SESSION['cus_state'] != 'Texas') {
+        $location_Factor = 4;
         return $location_Factor;
     } else {
-        $location_Factor = 4;
+        $location_Factor = 2;
         return $location_Factor;
     }
 }
@@ -597,15 +524,86 @@ function his_Factor()
 }
 function price_Calculator($current_Price, $quantity)
 {
-    $location_Factor = location_Factor();
+    $lo_Factor = location_Factor();
     $his_rate = his_Factor();
     if ($quantity > 1000) {
-        $margin = $current_Price * ($location_Factor - $his_rate + 2 + 10) / 100;
+        $margin = $current_Price * (($lo_Factor - $his_rate + 2 + 10) / 100);
     } else {
-        $margin = $current_Price * ($location_Factor - $his_rate + 3 + 10) / 100;
+        $margin = $current_Price * (($lo_Factor - $his_rate + 3 + 10) / 100);
     }
 
     $suggested_Price = $current_Price + $margin;
 
     return $suggested_Price;
+}
+
+/**get quote for dashboard */
+function dash_quote()
+{
+    require 'connect.php';
+    echo '<h2 style="background-color: rgb(91, 253, 91); margin: 0em; padding: 0.5em; text-align: center;">Prices of gas in ' . $_SESSION['cus_city'] . '</h2>
+        <div style=" text-align: center; margin: 10px;">
+        </div>
+        <div style="margin: auto; width: 98%;  background-color: lightgreen; text-align: center;">' . $_SESSION['mess'] .
+        $_SESSION['mess'] = "" .
+        '</div>';
+    try {
+        $sql = "SELECT * FROM products";
+        $statement = $conn->query($sql);
+        $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+        if ($results) {
+            foreach ($results as $result) {
+                $product_name = $result['product_name'];
+                $product_price = $result['product_price'];
+                $product_id = $result['product_id'];
+                $product_price = price_Calculator($product_price, 100);
+                $html = '<div id="quote_form_container">
+                    <form id="quote_form" action="functions.php" method="POST">
+                        <h3 id="quote_form_h3">' . $product_name . '</h3>
+                        <input id="quote_form_productID_input" name="product_id" type="text" readonly value="' . $product_id . '"><br>
+                        <label id="quote_form_label" for="product_price">Price:</label>
+                        <input id="quote_form_productPrice_input" name="product_price" type="text" readonly value="' . number_format($product_price, 2) . '">
+                        <p id="quote_form_unit">$/gallon</p><br>
+                        <p id="quote_form_text">(Tax is included.)</p>
+                        <input id="quote_form_quality_input" name="product_quantity" type="number" min="1" value="1" required>
+                        <button id="form_button" name="add_to_cart">Add to Cart</button>
+                    </form>
+                </div>';
+                echo $html;
+            }
+        }
+    } catch (PDOException $error) {
+        echo $error;
+    }
+}
+
+/**Get quotes for index page*/
+function index_Quote()
+{
+    require 'connect.php';
+    echo '<h2 style="background-color: rgb(91, 253, 91); margin: 0em; padding: 0.5em; text-align: center;">Quotes</h2>';
+    try {
+        $sql = "SELECT * FROM products";
+        $statement = $conn->query($sql);
+        $results = $statement->fetchAll(PDO::FETCH_ASSOC);
+        if ($results) {
+            foreach ($results as $result) {
+                $product_name = $result['product_name'];
+                $product_price = $result['product_price'];
+                $product_id = $result['product_id'];
+                $product_price = price_Calculator($product_price, 100);
+                $html = '<div id="quote_form_container"><form id="quote_form" action="" method="POST">
+                    <h3 id="quote_form_h3">' . $product_name . '</h3>
+                    <input id="quote_form_productID_input" type="text" readonly value="' . $product_id . '"><br>
+                    <label id="quote_form_label" for="product_price">Price:</label>
+                    <input id="quote_form_productPrice_input" type="text" readonly value="' . number_format($product_price, 2) . '">
+                    <p id="quote_form_unit">$/gallon</p><br>
+                    <p id="quote_form_text">(Tax is included.)</p>
+                </form></div>';
+                echo $html;
+            }
+        }
+    } catch (PDOException $error) {
+        echo $error;
+    }
 }

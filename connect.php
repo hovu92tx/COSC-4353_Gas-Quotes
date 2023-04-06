@@ -1,7 +1,7 @@
 <?php
 $servername = "127.0.0.1";
-$username = "hovu92dk";
-$password = "nhithieugia";
+$username = "root";
+$password = "";
 
 try {
   $conn = new PDO("mysql:host=$servername;dbname=abc database", $username, $password);
@@ -10,4 +10,3 @@ try {
 } catch (PDOException $e) {
   echo '<div style="background-color: red;height: 20px; text-align:center;" > Server Connection Fail!</div>';
 }
-

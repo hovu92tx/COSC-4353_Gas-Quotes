@@ -1,9 +1,8 @@
 <?php
 error_reporting(0);
 session_start();
-require 'functions.php';
+include 'functions.php';
 include 'config/template.php';
-include 'config/sessions.php';
 
 ?>
 <!DOCTYPE html>
