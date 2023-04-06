@@ -533,7 +533,7 @@ function price_Calculator($current_Price, $quantity)
     }
 
     $suggested_Price = $current_Price + $margin;
-
+    number_format($suggested_Price, 2);
     return $suggested_Price;
 }
 
