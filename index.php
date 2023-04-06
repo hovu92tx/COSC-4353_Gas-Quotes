@@ -1,6 +1,5 @@
 <?php
 error_reporting(0);
-session_start();
 include 'functions.php';
 include 'config/template.php';
 
