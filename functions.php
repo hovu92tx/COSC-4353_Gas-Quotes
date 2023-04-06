@@ -155,7 +155,8 @@ function pass_Check($password)
 function userName_Check($userName)
 {
     $specialChars = preg_match('@[^\w]@', $userName);
-    if (strlen($userName) <= 4 || $specialChars) {
+    $onlyDigit = preg_match('/^[0-9]+$/', $userName);
+    if (strlen($userName) <= 4 || $specialChars || $onlyDigit == 1) {
         return false;
     } else {
         return true;
@@ -201,14 +202,11 @@ function deencrypt_Data($encryption)
 
     // Non-NULL Initialization Vector for encryption
     $encryption_iv = '1234567891011121';
-
-    // Store the encryption key
-    $encryption_key = "COSC4353";
     // Non-NULL Initialization Vector for decryption
     $decryption_iv = '1234567891011121';
 
     // Store the decryption key
-    $decryption_key = "GeeksforGeeks";
+    $decryption_key = "COSC4353";
 
     // Use openssl_decrypt() function to decrypt the data
     $decryption = openssl_decrypt(
