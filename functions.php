@@ -395,7 +395,7 @@ function load_Cart()
             }
             $_SESSION['order_total'] = $order_total;
             echo '<div id="order_total"><h2>Order Total: $' . number_format($_SESSION['order_total'], 2) . ' </h2></div>
-                            <div><a id="button_link" href="cart_functions.php?clear_Cart=true">Clear Cart</a><a id="button_link" href="dashboard.php">Continue Shopping</a><a id="button_link" href="shipping_infor.php">Continue</a></div>
+                            <div><a id="button_link" href="functions.php?clear_Cart=true">Clear Cart</a><a id="button_link" href="dashboard.php">Continue Shopping</a><a id="button_link" href="shipping_infor.php">Continue</a></div>
                           ';
         }
     } catch (PDOException $error) {
