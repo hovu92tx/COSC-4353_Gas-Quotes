@@ -1,12 +1,9 @@
 <?php
-error_reporting(0);
 include 'functions.php';
 include 'config/template.php';
-
 ?>
 <!DOCTYPE html>
 <html>
-
 <head>
     <?php echo $head ?>
 </head>

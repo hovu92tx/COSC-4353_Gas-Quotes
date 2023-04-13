@@ -578,7 +578,7 @@ function dash_quote()
 /**Get quotes for index page*/
 function index_Quote()
 {
-    require 'connect.php';
+    require_once 'connect.php';
     echo '<h2 style="background-color: rgb(91, 253, 91); margin: 0em; padding: 0.5em; text-align: center;">Quotes</h2>';
     try {
         $sql = "SELECT * FROM products";
