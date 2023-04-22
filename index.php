@@ -4,6 +4,7 @@ include 'config/template.php';
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <?php echo $head ?>
 </head>
@@ -12,13 +13,8 @@ include 'config/template.php';
     <header>
         ABC Company
     </header>
-    <!--Login Form-->
-    <aside>
+    <section style="float: none; margin: auto;">
         <?php echo $loginForm ?>
-    </aside>
-    <section>
-        <!--Get quote from database and list them on the screen-->
-        <?php index_Quote() ?>
     </section>
 </body>
 <footer>
