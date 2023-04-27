@@ -1,7 +1,6 @@
 <?php
 error_reporting(0);
 session_start();
-
 //**LOGIN CHECK */
 if (isset($_POST["loginButton"])) {
     require 'connect.php';
@@ -141,7 +140,7 @@ function pass_Check($password)
 {
     $uppercase = preg_match('@[A-Z]@', $password);
     $lowercase = preg_match('@[a-z]@', $password);
-    $number    = preg_match('@[0-9]@', $password);
+    $number = preg_match('@[0-9]@', $password);
     $specialChars = preg_match('@[^\w]@', $password);
 
     if (!$uppercase || !$lowercase || !$number || !$specialChars || strlen($password) < 8) {
@@ -238,17 +237,25 @@ function filling($page)
             }
             $city = $_POST['city'];
             $state = $_POST['state'];
-            $zipcode = $_POST['zipcode'];
-            $_SESSION['cus_name'] = $name;
-            $_SESSION['cus_add1'] = $address1;
-            $_SESSION['cus_add2'] = $address2;
-            $_SESSION['cus_city'] = $city;
-            $_SESSION['cus_state'] = $state;
-            $_SESSION['cus_zipcode'] = $zipcode;
-            $sql = "UPDATE `user_profiles` SET name= '$name', address1='$address1', address2= '$address2', city= '$city',state= '$state', zipcode= '$zipcode' WHERE userid ='$user_id'";
-            $conn->query($sql);
+            if (zipcode_check($_POST['zipcode'])) {
+                $_SESSION['cus_name'] = $name;
+                $_SESSION['cus_add1'] = $address1;
+                $_SESSION['cus_add2'] = $address2;
+                $_SESSION['cus_city'] = $city;
+                $_SESSION['cus_state'] = $state;
+                $zipcode = $_POST['zipcode'];
+                $_SESSION['mess'] = "Updated";
+                $_SESSION['cus_zipcode'] = $zipcode;
+                $_SESSION['mess_color'] = "green";
+                $sql = "UPDATE `user_profiles` SET name= '$name', address1='$address1', address2= '$address2', city= '$city',state= '$state', zipcode= '$zipcode' WHERE userid ='$user_id'";
+                $conn->query($sql);
+                header('location: dash_board.php');
+            } else {
+                $_SESSION['mess'] = "Invalid zipcode";
+                $_SESSION['mess_color'] = "red";
+                header('location: profile_filling_page.php');
+            }
         }
-        header('location: dashboard.php');
     } elseif ($page == 'profile') {
         if (!empty($_POST['name'] && $_POST['address1'] && $_POST['city'] && $_POST['state'] && $_POST['zipcode'])) {
             $user_id = $_SESSION['userid'];
@@ -261,18 +268,33 @@ function filling($page)
             }
             $city = $_POST['city'];
             $state = $_POST['state'];
-            $zipcode = $_POST['zipcode'];
-            $_SESSION['cus_name'] = $name;
-            $_SESSION['cus_add1'] = $address1;
-            $_SESSION['cus_add2'] = $address2;
-            $_SESSION['cus_city'] = $city;
-            $_SESSION['cus_state'] = $state;
-            $_SESSION['cus_zipcode'] = $zipcode;
-            $sql = "UPDATE `user_profiles` SET name= '$name', address1='$address1', address2= '$address2', city= '$city',state= '$state', zipcode= '$zipcode' WHERE userid ='$user_id'";
-            $conn->query($sql);
+            if (zipcode_check($_POST['zipcode'])) {
+                $_SESSION['cus_name'] = $name;
+                $_SESSION['cus_add1'] = $address1;
+                $_SESSION['cus_add2'] = $address2;
+                $_SESSION['cus_city'] = $city;
+                $_SESSION['cus_state'] = $state;
+                $zipcode = $_POST['zipcode'];
+                $_SESSION['mess'] = "Updated";
+                $_SESSION['cus_zipcode'] = $zipcode;
+                $_SESSION['mess_color'] = "green";
+                $sql = "UPDATE `user_profiles` SET name= '$name', address1='$address1', address2= '$address2', city= '$city',state= '$state', zipcode= '$zipcode' WHERE userid ='$user_id'";
+                $conn->query($sql);
+                header('location: profile.php');
+            } else {
+                $_SESSION['mess'] = "Invalid zipcode";
+                $_SESSION['mess_color'] = "red";
+                header('location: profile.php');
+            }
         }
-        header('location: profile.php');
+
     }
+}
+
+function zipcode_check($zip)
+{
+    $zip_pattern = '/^[0-9]{5}(?:-[0-9]{4})?$/'; // pattern for US zip code (including 9-digit zip code)
+    return preg_match($zip_pattern, $zip);
 }
 
 /**-----------------------------------------------------------------------

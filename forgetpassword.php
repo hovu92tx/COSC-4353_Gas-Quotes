@@ -23,7 +23,8 @@ error_reporting(0);
     </aside>
     <section>
         <h2 style="text-align: center;">Recover Password!</h2>
-        <p>Coming soon!</p>
+        <p>Please contact admin to make a request!</p>
+        <p>Contact: Group 56 - COSC 4353</p>
     </section>
 </body>
 <footer>
