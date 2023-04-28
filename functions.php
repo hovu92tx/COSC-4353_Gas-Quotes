@@ -249,7 +249,7 @@ function filling($page)
                 $_SESSION['mess_color'] = "green";
                 $sql = "UPDATE `user_profiles` SET name= '$name', address1='$address1', address2= '$address2', city= '$city',state= '$state', zipcode= '$zipcode' WHERE userid ='$user_id'";
                 $conn->query($sql);
-                header('location: dash_board.php');
+                header('location: dashboard.php');
             } else {
                 $_SESSION['mess'] = "Invalid zipcode";
                 $_SESSION['mess_color'] = "red";
@@ -462,6 +462,7 @@ function orders()
 
 function order_detail($order_id)
 {
+    
 }
 
 /**Place an order */

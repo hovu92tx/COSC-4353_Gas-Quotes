@@ -5,6 +5,7 @@ include 'functions.php';
 error_reporting(0);
 /**set time zone for clock */
 date_default_timezone_set('America/Chicago');
+$_SESSION['mess'] = "";
 ?>
 <!DOCTYPE html>
 <html>
