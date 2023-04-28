@@ -136,31 +136,7 @@ if (isset($_POST["pf_save_button"])) {
  */
 
 /**Password Check */
-function pass_Check($password)
-{
-    $uppercase = preg_match('@[A-Z]@', $password);
-    $lowercase = preg_match('@[a-z]@', $password);
-    $number = preg_match('@[0-9]@', $password);
-    $specialChars = preg_match('@[^\w]@', $password);
 
-    if (!$uppercase || !$lowercase || !$number || !$specialChars || strlen($password) < 8) {
-        return false;
-    } else {
-        return true;
-    }
-}
-
-/**Username check */
-function userName_Check($userName)
-{
-    $specialChars = preg_match('@[^\w]@', $userName);
-    $onlyDigit = preg_match('/^[0-9]+$/', $userName);
-    if (strlen($userName) <= 4 || $specialChars || $onlyDigit == 1) {
-        return false;
-    } else {
-        return true;
-    }
-}
 
 /**Encrypt data*/
 function encrypt_Data($string)
